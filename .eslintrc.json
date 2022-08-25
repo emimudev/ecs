@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "./node_modules/standard/eslintrc.json"
+  ],
+  "env": {
+    "jest": true
+  },
+  "ignorePatterns": "build",
+  "rules": {
+    "space-before-function-paren": "off",
+    "indent": [
+      "warn",
+      2,
+      {
+        "ignoredNodes": [
+          "ConditionalExpression"
+        ]
+      }
+    ]
+  }
+}
