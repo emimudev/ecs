@@ -2,13 +2,13 @@
 This project is part of the Global Computer Applications course.
 ## 📄 Built with
 ##### 🤳 Frontend
- - [React](https://es.reactjs.org/)
- - [Chakra UI](https://chakra-ui.com/)
- - [create-react-app](https://create-react-app.dev/)
+ - [React](https://es.reactjs.org/){:target="_blank"}
+ - [Chakra UI](https://chakra-ui.com/){:target="_blank"}
+ - [create-react-app](https://create-react-app.dev/){:target="_blank"}
 ##### 🐱‍👤 Backend
- - [NodeJS](https://nodejs.org/es/)
- - [Express](https://expressjs.com/)
- - [MongoDB](https://www.mongodb.com/)
+ - [NodeJS](https://nodejs.org/es/){:target="_blank"}
+ - [Express](https://expressjs.com/){:target="_blank"}
+ - [MongoDB](https://www.mongodb.com/){:target="_blank"}
 ## 🚀 Quick Start
  1. **Install all dependencies:** Go to the root directory and run the following command.
 ```bash
@@ -17,7 +17,6 @@ npm install
  2. **Create the environment variables:** Go to the `api` directory and create an `.env` file with the following environment variables
 ```env
 PORT=<write_port_here>
-SECRET=<secret_here>
 ```
 ## ⚡ Available Scripts
 In the project directory, you can run:
