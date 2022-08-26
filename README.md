@@ -1,4 +1,4 @@
-# 💚 Electro Car Sales
+# Electro Car Sales ⚡💚
 This project is part of the Global Computer Applications course.
 ## 📄 Built with
 ##### 🤳 Frontend
