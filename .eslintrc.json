@@ -18,6 +18,7 @@
           "ConditionalExpression"
         ]
       }
-    ]
+    ],
+    "no-unused-vars": "warn"
   }
 }
