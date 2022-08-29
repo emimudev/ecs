@@ -5,7 +5,7 @@
  * @param {any[]} props
  */
 function hasEmpty(props) {
-  if (Object.values(props).length === 0) {
+  if (props.length === 0) {
     return true
   }
   for (const it of props) {

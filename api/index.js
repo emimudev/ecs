@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('./src/env')
 require('./src/database/mongo')
 const express = require('express')
 const middleware = require('./src/middleware')

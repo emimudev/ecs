@@ -1,12 +1,11 @@
 const mongoose = require('mongoose')
-const { NodeEnvironments } = require('../utils/nodeEnvironments')
-
 const {
+  NODE_ENV,
+  NodeEnvironments,
   MONGO_DB_URI,
   MONGO_DB_URI_DEV,
-  MONGO_DB_URI_TEST,
-  NODE_ENV
-} = process.env
+  MONGO_DB_URI_TEST
+} = require('../env')
 
 function getConnectionString() {
   switch (NODE_ENV) {
@@ -36,10 +35,10 @@ function disconnectDatabase() {
   return mongoose.disconnect()
 }
 
-// process.on('uncaughtException', () => {
-//   console.log('Mongoose disconnected on uncaughtException')
-//   disconnectDatabase()
-// })
+process.on('uncaughtException', () => {
+  console.log('Mongoose disconnected on uncaughtException')
+  disconnectDatabase()
+})
 
 process.on('SIGINT', () => {
   console.log('Mongoose disconnected on app termination')

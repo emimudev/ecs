@@ -1,12 +1,10 @@
-const { NodeEnvironments } = require('./utils/nodeEnvironments')
+const { NODE_ENV, PORT, NodeEnvironments } = require('./env')
 
 /**
  * Initialize the server by taking an Express app
  * @param {import('express').Express} app Express app
  */
 function startupServer(app) {
-  const { NODE_ENV, PORT } = process.env
-
   if (!app) {
     throw new Error('Invalid app instance')
   }
