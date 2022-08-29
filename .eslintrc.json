@@ -10,15 +10,7 @@
   "ignorePatterns": "build",
   "rules": {
     "space-before-function-paren": "off",
-    "indent": [
-      "warn",
-      2,
-      {
-        "ignoredNodes": [
-          "ConditionalExpression"
-        ]
-      }
-    ],
+    "indent": "warn",
     "no-unused-vars": "warn"
   }
 }

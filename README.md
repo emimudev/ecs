@@ -16,8 +16,11 @@ npm install
 ```
  2. **Create the environment variables:** Go to the `api` directory and create an `.env` file with the following environment variables
 ```env
-PORT=<write_port_here>
-SECRET=<secret_here>
+PORT
+MONGO_DB_URI
+MONGO_DB_URI_DEV
+MONGO_DB_URI_TEST
+BCRYPT_SECRET
 ```
 ## ⚡ Available Scripts
 In the project directory, you can run:

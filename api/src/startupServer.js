@@ -1,12 +1,8 @@
 const { NodeEnvironments } = require('./utils/nodeEnvironments')
 
 /**
- * @typedef {import('express').Express} Express
- */
-
-/**
  * Initialize the server by taking an Express app
- * @param {Express} app Express app
+ * @param {import('express').Express} app Express app
  */
 function startupServer(app) {
   const { NODE_ENV, PORT } = process.env

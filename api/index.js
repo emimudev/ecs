@@ -1,17 +1,19 @@
 require('dotenv').config()
+require('./src/database/mongo')
 const express = require('express')
-const { startupServer } = require('./startupServer')
+const middleware = require('./src/middleware')
+const { startupServer } = require('./src/startupServer')
+const { loginRouter, usersRouter } = require('./src/controllers')
 
 const app = express()
 
-/*
- * Allows to serve the application from the root.
- * A build of the application must exist.
- */
+app.use(express.json())
+app.use(middleware.apiLogger())
 app.use(express.static('../app/build'))
 
-app.get('/', function (req, res) {
-  res.send('Hello World')
-})
+app.use('/api/login', loginRouter)
+app.use('/api/users', usersRouter)
+
+app.use(middleware.handleErrors())
 
 startupServer(app)
