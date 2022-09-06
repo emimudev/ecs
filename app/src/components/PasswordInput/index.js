@@ -1,15 +1,22 @@
-import { Button, Icon, Input, InputGroup, InputRightElement, Tooltip, useBoolean } from '@chakra-ui/react'
+import {
+  Button,
+  Icon,
+  Input,
+  InputGroup,
+  InputRightElement,
+  Tooltip,
+  useBoolean
+} from '@chakra-ui/react'
 import { GoEye, GoEyeClosed } from 'react-icons/go'
 
 function PasswordInput({ value, handleChange, ...inputProps }) {
   const [isVisible, { toggle }] = useBoolean()
 
   return (
-    <InputGroup size='lg'>
+    <InputGroup size={inputProps?.size}>
       <Input
         type={isVisible ? 'text' : 'password'}
-        variant='filled'
-        placeholder='Escriba su contraseña'
+        placeholder='Introduzca su contraseña'
         value={value}
         onChange={handleChange}
         {...inputProps}

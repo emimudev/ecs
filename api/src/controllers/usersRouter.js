@@ -34,7 +34,7 @@ usersRouter.delete('/:id', userExtractor, async (request, response, next) => {
 
 usersRouter.post('/', async (request, response, next) => {
   const { body } = request
-  const { name, email, password } = body
+  const { name, lastname, email, password } = body
   const saltRounds = 10
   if (hasEmpty([name, email, password])) {
     return response.sendStatus(400)
@@ -42,6 +42,7 @@ usersRouter.post('/', async (request, response, next) => {
   const passwordHash = await bcrypt.hash(password, saltRounds)
   const newUser = new UserModel({
     name,
+    lastname,
     email,
     password: passwordHash
   })

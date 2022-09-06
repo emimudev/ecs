@@ -24,7 +24,8 @@ const userExtractor = (request, response, next) => {
   }
 
   const { id: userId } = decodedToken
-  request.userId = userId
+  request.body._userId = userId
+  request.body._sessionToken = token
   next()
 }
 

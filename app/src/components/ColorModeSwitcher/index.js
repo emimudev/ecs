@@ -15,6 +15,7 @@ export default function ColorModeSwitcher(props) {
       color='current'
       onClick={toggleColorMode}
       icon={<SwitchIcon />}
+      borderRadius='full'
       {...props}
     />
   )

@@ -1,339 +1,64 @@
-import {
-  Box,
-  Flex,
-  Text,
-  IconButton,
-  Button,
-  Stack,
-  Collapse,
-  Icon,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  useColorModeValue,
-  useBreakpointValue,
-  useDisclosure,
-  Divider,
-  Center,
-  Link
-} from '@chakra-ui/react'
-import ColorModeSwitcher from 'components/ColorModeSwitcher'
-import { MdMenu, MdClose, MdChevronRight, MdExpandMore } from 'react-icons/md'
-import { FaChevronDown } from 'react-icons/fa'
-import { Link as RouterLink } from 'react-router-dom'
-import LoginPopup from 'components/LoginPopup'
+import { Box, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
+import MobileNavigation, { MobileNavTrigger } from './MobileNavigation'
+import Brand from '../Brand'
+import NavbarContextProvider from './Context'
+import DesktopNavigation from './DesktopNavigation'
+import UserHud from './UserHud'
+import AuthPopup from 'components/AuthPopup'
 
 export default function Navbar() {
-  const { isOpen, onToggle } = useDisclosure()
   return (
-    <HeaderContainer>
-      <Flex
-        color={useColorModeValue('gray.600', 'white')}
-        minH='60px'
-        maxH='60px'
-        height='60px'
-        overflow='hidden'
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle='solid'
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align='center'
-      >
-        <Flex flex='0 0 auto' display={{ base: 'flex', lg: 'none' }}>
-          <IconButton
-            onClick={onToggle}
-            icon={isOpen ? <Icon w={7} h={7} as={MdClose} /> : <Icon w={7} h={7} as={MdMenu} />}
-            variant='ghost'
-            aria-label='Toggle Navigation'
-          />
-        </Flex>
-        <NavbarBrand />
-        <Flex flex={{ base: 1 }} justify={{ base: 'start', md: 'start' }}>
-          <Stack direction='row' spacing={6} />
-          <Flex display={{ base: 'none', lg: 'flex' }} ml={10}>
-            <DesktopNav />
+    <NavbarContextProvider>
+      <NavBarContainer>
+        <NavbarFlex>
+          <Flex display={{ base: 'flex', lg: 'none' }}>
+            <MobileNavTrigger />
           </Flex>
-        </Flex>
-
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify='flex-end'
-          direction='row'
-          spacing={4}
-        >
-          <Center display={{ base: 'none', lg: 'flex' }}>
-            <ColorModeSwitcher />
-          </Center>
-          <Center display={{ base: 'none', lg: 'none' }}>
-            <Divider orientation='vertical' />
-          </Center>
-          <LoginPopup activator={LoginButton} />
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontWeight={600}
-            color='white'
-            bg='pink.500'
-            _hover={{
-              bg: 'pink.400'
-            }}
-            _active={{
-              bg: 'pink.300'
-            }}
-          >
-            Registrarse
-          </Button>
-        </Stack>
-      </Flex>
-      <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse>
-    </HeaderContainer>
+          <Brand />
+          <Flex display={{ base: 'none', lg: 'flex' }} ml='10px'>
+            <DesktopNavigation />
+          </Flex>
+          <Spacer />
+          <UserHud />
+        </NavbarFlex>
+        <MobileNavigation />
+      </NavBarContainer>
+      <AuthPopup />
+    </NavbarContextProvider>
   )
 }
 
-function HeaderContainer({ children }) {
+const NavBarContainer = ({ children }) => {
   return (
     <Box
-      position='sticky'
+      position='absolute'
       top={0}
       left={0}
       right={0}
-      bg={useColorModeValue('white', 'gray.800')}
+      _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
+      _dark={{ bg: 'rgba(26, 32, 44, 0.85)' }}
+      backdropFilter='saturate(180%) blur(6px)'
     >
       {children}
     </Box>
   )
 }
 
-function NavbarBrand() {
+const NavbarFlex = ({ children }) => {
   return (
-    <Box
-      fontFamily='heading'
-      fontSize={useBreakpointValue({ base: '18px', md: '22px' })}
-      fontWeight='semibold'
+    <Flex
+      color={useColorModeValue('gray.600', 'white')}
+      height='navbar'
+      overflow='hidden'
+      py={{ base: 2 }}
+      px={{ base: 4 }}
+      borderBottom={1}
+      borderStyle='solid'
+      borderColor={useColorModeValue('gray.200', 'gray.900')}
+      align='center'
+      gap='10px'
     >
-      <Center cursor='pointer'>
-        <RouterLink to='/'>
-          <Box display={{ base: 'none', sm: 'flex' }} gap='6px' alignItems='center' flexDir='row'>
-            <Center>
-              <Text display='inline-flex'>Electro</Text>
-              <Text
-                display='inline-flex'
-                color={useColorModeValue('pink.500', 'pink.200')}
-                fontWeight='bold'
-              >
-                CAR
-              </Text>
-              <Text display='inline-flex'>Sales</Text>
-            </Center>
-          </Box>
-          <Stack spacing='2px' display={{ sm: 'none' }}>
-            <Text
-              lineHeight={1}
-              color={useColorModeValue('pink.500', 'pink.200')}
-              fontWeight='bold'
-            >
-              ECS
-            </Text>
-            <Text lineHeight={1} fontSize='small' color='gray.500'>ElectroCARSales</Text>
-          </Stack>
-        </RouterLink>
-      </Center>
-    </Box>
+      {children}
+    </Flex>
   )
 }
-
-function LoginButton(props) {
-  return (
-    <Button
-      colorScheme={useBreakpointValue({ base: 'pink', md: 'gray' })}
-      size={useBreakpointValue({ base: 'sm', md: 'md' })}
-      {...props}
-    >
-      Iniciar sesión
-    </Button>
-  )
-}
-
-const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200')
-  const linkHoverColor = useColorModeValue('gray.800', 'white')
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800')
-
-  return (
-    <Stack direction='row' spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Center key={navItem.label}>
-          <Box>
-            <Popover trigger='hover' placement='bottom'>
-              <PopoverTrigger>
-                <Link
-                  p={2}
-                  href={navItem.href ?? '#'}
-                  fontSize='sm'
-                  fontWeight={500}
-                  color={linkColor}
-                  _hover={{
-                    textDecoration: 'none',
-                    color: linkHoverColor
-                  }}
-                  alignItems='center'
-                  display='flex'
-                  gap={2}
-                >
-                  {navItem.label}{navItem.children ? <Icon as={FaChevronDown} /> : null}
-                </Link>
-              </PopoverTrigger>
-
-              {navItem.children && (
-                <PopoverContent
-                  border={0}
-                  boxShadow='xl'
-                  bg={popoverContentBgColor}
-                  p={2}
-                  rounded='xl'
-                  minW='sm'
-                >
-                  <Stack>
-                    {navItem.children.map((child) => (
-                      <DesktopSubNav key={child.label} {...child} />
-                    ))}
-                  </Stack>
-                </PopoverContent>
-              )}
-            </Popover>
-          </Box>
-        </Center>
-      ))}
-    </Stack>
-  )
-}
-
-const DesktopSubNav = ({ label, href, subLabel }) => {
-  return (
-    <Link
-      href={href}
-      role='group'
-      display='block'
-      p={2}
-      rounded='md'
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}
-    >
-      <Stack direction='row' align='center'>
-        <Box>
-          <Text
-            transition='all .3s ease'
-            _groupHover={{ color: 'pink.400' }}
-            fontWeight={500}
-          >
-            {label}
-          </Text>
-          <Text fontSize='sm'>{subLabel}</Text>
-        </Box>
-        <Flex
-          transition='all .3s ease'
-          transform='translateX(-10px)'
-          opacity={0}
-          _groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-          justify='flex-end'
-          align='center'
-          flex={1}
-        >
-          <Icon color='pink.400' w={5} h={5} as={MdChevronRight} />
-        </Flex>
-      </Stack>
-    </Link>
-  )
-}
-
-const MobileNav = () => {
-  return (
-    <Stack
-      bg={useColorModeValue('white', 'gray.800')}
-      p={4}
-      display={{ lg: 'none' }}
-    >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
-      ))}
-    </Stack>
-  )
-}
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? '#'}
-        justify='space-between'
-        align='center'
-        _hover={{
-          textDecoration: 'none'
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={MdExpandMore}
-            transition='all .25s ease-in-out'
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle='solid'
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align='start'
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
-    </Stack>
-  )
-}
-
-const NAV_ITEMS = [
-  {
-    label: 'Categorías',
-    children: [
-      {
-        label: 'Vehículos nuevos',
-        subLabel: 'Encuentra tu auto ideal',
-        href: '#'
-      },
-      {
-        label: 'Vehículos usados',
-        subLabel: 'Revisa los vehículos usados a un excelente precio',
-        href: '#'
-      }
-    ]
-  },
-  {
-    label: 'Ofertas del día'
-  },
-  {
-    label: 'Alquiler de autos'
-  }
-]

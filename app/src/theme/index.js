@@ -9,13 +9,12 @@ export const theme = extendTheme({
   config: configTheme,
   styles: {
     global: (props) => ({
-      // styles for the `body`
       body: {
-        bg: mode('#f8f8f8', '#161c26')(props)
+        bg: mode('#EDF2F7', '#161c26')(props)
       }
     })
   },
-  colors: {
-    primary: 'red'
+  sizes: {
+    navbar: '65px'
   }
 })
