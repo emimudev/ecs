@@ -1,15 +1,17 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const { BCRYPT_SECRET } = require('../env')
-const signinRouter = require('express').Router()
-const User = require('../models/userModel')
 const { userExtractor } = require('../middleware')
+const { UsersService } = require('../services/UsersService')
+const authRouter = require('express').Router()
 
-signinRouter.post('/login', async (request, response) => {
+const TOKEN_EXPIRATION_TIME = '7d'
+
+authRouter.post('/login', async (request, response) => {
   const { body } = request
   const { username: email, password } = body
 
-  const user = await User.findOne({ email })
+  const user = await UsersService.getByEmail({ email })
   const passwordCorrect = await isPasswordCorrect(password, user)
 
   if (!(user && passwordCorrect)) {
@@ -24,24 +26,20 @@ signinRouter.post('/login', async (request, response) => {
   }
 
   const token = jwt.sign(userForToken, BCRYPT_SECRET, {
-    expiresIn: '7d'
+    expiresIn: TOKEN_EXPIRATION_TIME
   })
 
   response.send({
-    user: {
-      name: user.name,
-      lastname: user.lastname,
-      email: user.email
-    },
+    user,
     token
   })
 })
 
-signinRouter.get('/verify', userExtractor, async (request, response) => {
+authRouter.get('/verify', userExtractor, async (request, response) => {
   const { body } = request
-  const { _userId } = body
+  const { _userId, _sessionToken } = body
 
-  const user = await User.findById(_userId)
+  const user = await UsersService.getById({ userId: _userId })
 
   if (!user) {
     return response.status(400).json({
@@ -49,22 +47,9 @@ signinRouter.get('/verify', userExtractor, async (request, response) => {
     })
   }
 
-  const userForToken = {
-    id: user._id,
-    username: user.email
-  }
-
-  const token = jwt.sign(userForToken, BCRYPT_SECRET, {
-    expiresIn: '7d'
-  })
-
   response.send({
-    user: {
-      name: user.name,
-      lastname: user.lastname,
-      email: user.email
-    },
-    token
+    user,
+    token: _sessionToken
   })
 })
 
@@ -74,4 +59,4 @@ const isPasswordCorrect = async (password, user) => {
     : await bcrypt.compare(password, user.password)
 }
 
-module.exports = signinRouter
+module.exports = authRouter

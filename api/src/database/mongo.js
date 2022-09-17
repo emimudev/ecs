@@ -35,7 +35,8 @@ function disconnectDatabase() {
   return mongoose.disconnect()
 }
 
-process.on('uncaughtException', () => {
+process.on('uncaughtException', (errorInfo) => {
+  console.log({ uncaughtException: errorInfo })
   console.log('Mongoose disconnected on uncaughtException')
   disconnectDatabase()
 })

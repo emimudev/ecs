@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const { BCRYPT_SECRET } = require('../env')
 
 /**
- * Verify that the authentication token exists and set the userId in the request object.
+ * Verify that the authentication token exists and set the userId and sessionToken in the request object.
  */
 const userExtractor = (request, response, next) => {
   const authorization = request.get('authorization')

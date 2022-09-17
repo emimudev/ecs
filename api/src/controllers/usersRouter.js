@@ -2,24 +2,23 @@ const bcrypt = require('bcrypt')
 const { userExtractor } = require('../middleware')
 const usersRouter = require('express').Router()
 const UserModel = require('../models/userModel')
+const { UsersService } = require('../services/UsersService')
 const { hasEmpty } = require('../utils/validators')
 
 usersRouter.get('/', userExtractor, async (request, response) => {
-  const users = await UserModel.find({})
+  const users = await UsersService.getAll()
   response.json(users)
 })
 
-usersRouter.get('/:id', (request, response, next) => {
+usersRouter.get('/:id', async (request, response, next) => {
   const { id } = request.params
-  UserModel.findById(id)
-    .then((user) => {
-      if (user) response.json(user)
-      else response.status(404).end()
-    })
-    .catch((err) => {
-      console.log({ err })
-      next(err)
-    })
+  try {
+    const user = await UsersService.getById({ userId: id })
+    if (user) response.json(user)
+    else response.status(404).end()
+  } catch (error) {
+    next(error)
+  }
 })
 
 usersRouter.delete('/:id', userExtractor, async (request, response, next) => {

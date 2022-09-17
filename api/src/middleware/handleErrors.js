@@ -1,5 +1,5 @@
 const ERROR_HANDLERS = {
-  CastError: (res, error) => res.status(400).json({ error }),
+  CastError: (res, error) => res.status(404).json({ error }),
 
   ValidationError: (res, err) => res.status(409).json({ error: err.message }),
 
