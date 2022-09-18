@@ -30,7 +30,7 @@ function SignInForm() {
           label='Contraseña'
           variant='password'
         />
-        <Flex justify='space-between'>
+        <Flex justify='space-between' flexWrap='wrap'>
           <Checkbox
             name='rememberMe'
             checked={formik.values.rememberMe}
@@ -52,7 +52,7 @@ function SignInForm() {
           >
             Iniciar sesión
           </Button>
-          <Stack direction='row' justify='flex-end' alignItems='center' spacing={2}>
+          <Stack direction='row' justify='flex-end' alignItems='center' spacing={2} flexWrap='wrap'>
             <Text>¿No tienes una cuenta?</Text>
             <Button
               lineHeight={1}

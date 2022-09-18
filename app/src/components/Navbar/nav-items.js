@@ -1,6 +1,10 @@
+import { RiApps2Fill } from 'react-icons/ri'
+import { MdLocalOffer } from 'react-icons/md'
+
 export const NAV_ITEMS = [
   {
     label: 'Categorías',
+    icon: RiApps2Fill,
     children: [
       {
         label: 'Vehículos nuevos',
@@ -16,6 +20,7 @@ export const NAV_ITEMS = [
   },
   {
     label: 'Ofertas del día',
-    href: '/day-offers'
+    href: '/day-offers',
+    icon: MdLocalOffer
   }
 ]

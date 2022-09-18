@@ -1,3 +1,5 @@
+import { useCallback, useRef } from 'react'
+import { Link, matchPath, useLocation } from 'react-router-dom'
 import {
   Link as FancyLink,
   Button,
@@ -8,12 +10,10 @@ import {
   useColorModeValue,
   Stack
 } from '@chakra-ui/react'
-import { useCallback, useRef } from 'react'
 import { FaChevronDown } from 'react-icons/fa'
-import { Link, matchPath, useLocation } from 'react-router-dom'
 import DesktopSubNavItem from './DesktopSubNavItem'
 
-export default function DesktopNavItem({ navItem }) {
+function DesktopNavItem({ navItem }) {
   const location = useLocation()
   const match = navItem.href && matchPath(navItem.href, location.pathname)
   const linkBgColor = useColorModeValue(
@@ -28,7 +28,7 @@ export default function DesktopNavItem({ navItem }) {
   const ref = useRef()
 
   const navButtonProps = {
-    leftIcon: navItem.icon ? navItem.icon : null,
+    leftIcon: navItem.icon && <Icon as={navItem.icon} h={5} w={5} />,
     variant: 'ghost',
     size: 'sm',
     bg: linkBgColor,
@@ -43,6 +43,7 @@ export default function DesktopNavItem({ navItem }) {
   const rightIcon = useCallback(({ isOpen }) => (
     navItem.children && (
       <Icon
+        p={10}
         as={() => (
           <FaChevronDown
             style={{
@@ -65,7 +66,11 @@ export default function DesktopNavItem({ navItem }) {
               to={navItem.href ?? '#'}
               _hover={{ textDecor: 'none' }}
             >
-              <Button {...navButtonProps} rightIcon={rightIcon({ isOpen })}>
+              <Button
+                {...navButtonProps}
+                rightIcon={rightIcon({ isOpen })}
+                iconSpacing={2}
+              >
                 {navItem.label}
               </Button>
             </FancyLink>
@@ -94,3 +99,5 @@ export default function DesktopNavItem({ navItem }) {
     </Popover>
   )
 }
+
+export default DesktopNavItem

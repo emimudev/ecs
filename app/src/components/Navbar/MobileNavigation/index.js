@@ -1,102 +1,77 @@
 import {
   Collapse,
   Flex,
-  Icon,
-  IconButton,
-  Link,
   Stack,
   useColorModeValue,
-  useDisclosure,
-  Text
+  VStack,
+  useBreakpointValue,
+  Divider
 } from '@chakra-ui/react'
-import { MdClose, MdExpandMore, MdMenu } from 'react-icons/md'
+import { CgLogOut } from 'react-icons/cg'
+import { RiSettings4Fill } from 'react-icons/ri'
 import { useNavbarContext } from '../Context'
 import { NAV_ITEMS } from '../nav-items'
+import Authenticated from 'components/Authenticated'
+import Unauthenticated from 'components/Unauthenticated'
+import AuthenticatedHeader from './AuthenticatedHeader'
+import UnauthenticatedHeader from './UnauthenticatedHeader'
+import { useDispatch } from 'react-redux'
+import { logoutAction } from 'redux/states/auth.state'
+import MobileNavItem from './MobileNavItem'
 
 function MobileNavigation() {
   const { isMobileOpen } = useNavbarContext()
 
   return (
     <Collapse in={isMobileOpen} animateOpacity>
-      <Stack
+      <Flex
+        fontSize='sm'
+        px={4}
+        py={3}
+        direction='column'
         bg={useColorModeValue('white', 'gray.800')}
-        p={4}
         display={{ lg: 'none' }}
       >
-        {NAV_ITEMS.map((navItem) => (
-          <MobileNavItem key={navItem.label} {...navItem} />
-        ))}
-      </Stack>
+        <VStack align='flex-start' display={useBreakpointValue({ md: 'none' })}>
+          <Authenticated>
+            <AuthenticatedHeader />
+          </Authenticated>
+          <Unauthenticated>
+            <UnauthenticatedHeader />
+          </Unauthenticated>
+        </VStack>
+        <Stack spacing={2}>
+          {NAV_ITEMS.map((navItem) => (
+            <MobileNavItem key={navItem.label} {...navItem} />
+          ))}
+        </Stack>
+        <MobileNavigationFooter />
+      </Flex>
     </Collapse>
   )
 }
 
-export const MobileNavTrigger = () => {
-  const { isMobileOpen, onToggle } = useNavbarContext()
-
-  const toggleIcon = isMobileOpen
-    ? <Icon w={6} h={6} as={MdClose} />
-    : <Icon w={6} h={6} as={MdMenu} />
+function MobileNavigationFooter() {
+  const dispatcher = useDispatch()
+  const handleLogout = () => dispatcher(logoutAction())
 
   return (
-    <IconButton
-      onClick={onToggle}
-      icon={toggleIcon}
-      variant='ghost'
-      aria-label='Toggle Navigation'
-    />
-  )
-}
-
-const MobileNavItem = ({ label, children, href }) => {
-  const { isOpen, onToggle } = useDisclosure()
-
-  return (
-    <Stack spacing={4} onClick={children && onToggle}>
-      <Flex
-        py={2}
-        as={Link}
-        href={href ?? '#'}
-        justify='space-between'
-        align='center'
-        _hover={{
-          textDecoration: 'none'
-        }}
-      >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
-          {label}
-        </Text>
-        {children && (
-          <Icon
-            as={MdExpandMore}
-            transition='all .25s ease-in-out'
-            transform={isOpen ? 'rotate(180deg)' : ''}
-            w={6}
-            h={6}
-          />
-        )}
-      </Flex>
-
-      <Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-        <Stack
-          mt={2}
-          pl={4}
-          borderLeft={1}
-          borderStyle='solid'
-          borderColor={useColorModeValue('gray.200', 'gray.700')}
-          align='start'
-        >
-          {children &&
-            children.map((child) => (
-              <Link key={child.label} py={2} href={child.href}>
-                {child.label}
-              </Link>
-            ))}
-        </Stack>
-      </Collapse>
+    <Stack display={{ md: 'none' }}>
+      <Divider style={{ marginTop: '0.5rem' }} />
+      <MobileNavItem
+        key='Ajustes'
+        label='Ajustes'
+        onClick={() => console.log('hola')}
+        icon={RiSettings4Fill}
+      />
+      <Authenticated>
+        <MobileNavItem
+          key='Salir'
+          label='Cerrar sesión'
+          onClick={handleLogout}
+          icon={CgLogOut}
+        />
+      </Authenticated>
     </Stack>
   )
 }

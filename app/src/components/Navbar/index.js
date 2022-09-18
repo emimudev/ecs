@@ -1,10 +1,11 @@
 import { Box, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
-import MobileNavigation, { MobileNavTrigger } from './MobileNavigation'
+import MobileNavigation from './MobileNavigation'
 import Brand from '../Brand'
 import NavbarContextProvider from './Context'
 import DesktopNavigation from './DesktopNavigation'
 import UserHud from './UserHud'
 import AuthPopup from 'components/AuthPopup'
+import MobileNavTrigger from './MobileNavigation/MobileNavTrigger'
 
 export default function Navbar() {
   return (
