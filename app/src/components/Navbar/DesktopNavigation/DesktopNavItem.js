@@ -57,7 +57,7 @@ function DesktopNavItem({ navItem }) {
   ), [navItem])
 
   return (
-    <Popover placement='bottom-start' initialFocusRef={ref}>
+    <Popover placement='bottom-start' initialFocusRef={ref} gutter='18'>
       {({ isOpen, onClose }) => (
         <>
           <PopoverTrigger>

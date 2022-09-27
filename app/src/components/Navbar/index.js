@@ -5,12 +5,16 @@ import NavbarContextProvider from './Context'
 import DesktopNavigation from './DesktopNavigation'
 import UserHud from './UserHud'
 import AuthPopup from 'components/AuthPopup'
+import MobileNavTrigger from './MobileNavigation/MobileNavTrigger'
 
 export default function Navbar() {
   return (
     <NavbarContextProvider>
       <NavBarContainer>
         <NavbarFlex>
+          <Flex display={{ base: 'none', sm: 'flex', lg: 'none' }}>
+            <MobileNavTrigger />
+          </Flex>
           <Brand />
           <Flex display={{ base: 'none', lg: 'flex' }} ml='10px'>
             <DesktopNavigation />

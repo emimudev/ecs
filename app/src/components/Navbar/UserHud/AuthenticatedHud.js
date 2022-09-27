@@ -27,6 +27,7 @@ import { CgLogOut } from 'react-icons/cg'
 import { logoutAction } from 'redux/slices/auth.slice'
 import { useAuthState } from 'hooks/useAuthState'
 import UserAvatar from 'components/UserAvatar'
+import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
 
 function AuthenticatedHud() {
   const { user } = useAuthState()
@@ -48,12 +49,14 @@ function AuthenticatedHud() {
         borderRadius='full'
         leftIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
-        h='40px'
-        fontSize='sm'
         lineHeight='1'
+        display={{ base: 'none', sm: 'flex' }}
       >
         {useBreakpointValue({ base: 'Publicar', md: 'Publicar anuncio' })}
       </Button>
+      <Flex display={{ base: 'flex', sm: 'none', md: 'none' }}>
+        <MobileNavTrigger />
+      </Flex>
       <Center h='50px' display={{ base: 'none', md: 'flex' }}>
         <Divider orientation='vertical' h='100%' />
       </Center>
