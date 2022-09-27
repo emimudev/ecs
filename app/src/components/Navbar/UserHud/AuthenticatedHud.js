@@ -47,6 +47,9 @@ function AuthenticatedHud() {
         borderRadius='full'
         leftIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
+        h='40px'
+        fontSize='sm'
+        lineHeight='1'
       >
         {useBreakpointValue({ base: 'Publicar', md: 'Publicar anuncio' })}
       </Button>
@@ -54,8 +57,8 @@ function AuthenticatedHud() {
         <Divider orientation='vertical' h='100%' />
       </Center>
       <Menu>
-        <MenuButton display={{ base: 'none', md: 'flex' }}>
-          <UserAvatar user={user} />
+        <MenuButton display={{ base: 'none', md: 'flex' }} _hover={{ filter: 'brightness(0.8)' }}>
+          <UserAvatar user={user} w='40px' h='40px' selectable />
         </MenuButton>
         <MenuList
           _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
@@ -64,7 +67,7 @@ function AuthenticatedHud() {
           <Flex p={2} justify='center'>
             <Flex gap={2}>
               <Stack direction='column' align='center'>
-                <UserAvatar user={user} />
+                <UserAvatar user={user} w='55px' h='55px' />
                 <Text noOfLines={2} fontWeight='semibold' fontSize='md' lineHeight='1.2'>
                   {`${user.name} ${user.lastname}`}
                 </Text>
@@ -76,18 +79,6 @@ function AuthenticatedHud() {
               </Stack>
             </Flex>
           </Flex>
-          {/* <MenuItem p='0' my='2'>
-            <Button
-              w='full'
-              size='sm'
-              color='white'
-              colorScheme='pink'
-              bgGradient='linear(to-l, #ED64A6, #FF0080)'
-              _hover={{ bgGradient: 'linear(to-r, #ED64A6, #FF0080)' }}
-            >
-              OBTENER PREMIUM
-            </Button>
-          </MenuItem> */}
           <MenuDivider />
           <MenuGroup color={titleMenuColor} title='Perfil'>
             <MenuItem borderRadius='lg'>

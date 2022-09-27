@@ -1,10 +1,19 @@
-import { Button, Stack, Text } from '@chakra-ui/react'
+import { useEffect, useId, useState } from 'react'
+import { Button, Stack, Text, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
-import { openSignInAction } from 'redux/states/auth.state'
+import { closeAuthModalAction, loginAction, openSignInAction } from 'redux/states/auth.state'
 import FormikFormControl from 'components/FormikFormControl'
 import { AuthFormHeader } from '..'
+import authAPI from 'services/authAPI'
+
+const ErrorInfoEmpty = {
+  status: null,
+  isError: false,
+  title: '',
+  description: ''
+}
 
 function SignUpForm() {
   const dispatcher = useDispatch()
@@ -19,10 +28,57 @@ function SignUpForm() {
     validationSchema,
     onSubmit: handleSubmit
   })
+  const [errorInfo, setErrorInfo] = useState(ErrorInfoEmpty)
+  const toast = useToast()
+  const toastId = useId()
 
   const openLoginForm = () => {
     dispatcher(openSignInAction())
   }
+
+  function handleSubmit(values, { setSubmitting }) {
+    setErrorInfo(ErrorInfoEmpty)
+    console.log({ values })
+    authAPI.signUp(values)
+      .then(signUpInfo => signUp(signUpInfo))
+      .catch(({ status }) => handleFormError({ status }))
+      .finally(() => setSubmitting(false))
+  }
+
+  const signUp = (signUpInfo) => {
+    const { user, token } = signUpInfo
+    console.log({ signUpInfo })
+    dispatcher(loginAction({
+      user,
+      sessionToken: token,
+      rememberMe: true
+    }))
+    dispatcher(closeAuthModalAction())
+  }
+
+  const handleFormError = ({ status }) => {
+    formik.setErrors({ email: '' })
+    setErrorInfo({
+      status,
+      isError: true,
+      title: 'Error al inscribirse',
+      description: 'El correo ya ha sido registrado'
+    })
+  }
+
+  useEffect(() => {
+    if (!toast.isActive(toastId) && errorInfo.isError) {
+      toast({
+        id: toastId,
+        status: 'error',
+        title: errorInfo.title,
+        description: errorInfo.description,
+        variant: 'left-accent',
+        position: 'bottom-right',
+        isClosable: true
+      })
+    }
+  }, [errorInfo, toast, toastId])
 
   return (
     <form onSubmit={formik.handleSubmit} autoComplete='off'>
@@ -58,7 +114,7 @@ function SignUpForm() {
         <FormikFormControl
           formik={formik}
           name='confirmPassword'
-          placeholder='Introduce tu contraseña'
+          placeholder='Vuelve a introducir la contraseña'
           label='Confirmar contraseña'
           variant='password'
         />
@@ -88,13 +144,6 @@ function SignUpForm() {
       </Stack>
     </form>
   )
-}
-
-const handleSubmit = (values, { setSubmitting }) => {
-  setTimeout(() => {
-    alert(JSON.stringify(values, null, 2))
-    setSubmitting(false)
-  }, 500)
 }
 
 const validationSchema = yup.object({

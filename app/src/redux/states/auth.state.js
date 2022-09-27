@@ -25,13 +25,25 @@ const AuthEmptyState = {
 }
 
 function getInitialState() {
-  const sessionToken = localStorage.getItem('sessionToken')
-  const sessionUser = localStorage.getItem('sessionUser')
-  if (sessionToken && sessionUser) {
+  const storeToken = window.localStorage.getItem('sessionToken')
+  const storeUser = window.localStorage.getItem('sessionUser')
+  const sessionUser = window.sessionStorage.getItem('sessionUser')
+  const sessionToken = window.sessionStorage.getItem('sessionUser')
+
+  if (sessionUser && sessionToken) {
     return {
       isLogged: true,
       sessionToken,
-      user: sessionUser,
+      user: JSON.parse(sessionUser),
+      authModal: AuthModalEmptyState
+    }
+  }
+
+  if (storeToken && storeUser) {
+    return {
+      isLogged: true,
+      sessionToken: storeToken,
+      user: JSON.parse(storeUser),
       authModal: AuthModalEmptyState
     }
   }
@@ -47,6 +59,9 @@ export const authSlice = createSlice({
       if (rememberMe) {
         window.localStorage.setItem('sessionToken', sessionToken)
         window.localStorage.setItem('sessionUser', JSON.stringify(user))
+      } else {
+        window.sessionStorage.setItem('sessionToken', sessionToken)
+        window.sessionStorage.setItem('sessionUser', JSON.stringify(user))
       }
       return {
         ...state,
@@ -58,6 +73,8 @@ export const authSlice = createSlice({
     logoutAction: () => {
       window.localStorage.removeItem('sessionToken')
       window.localStorage.removeItem('sessionUser')
+      window.sessionStorage.removeItem('sessionToken')
+      window.sessionStorage.removeItem('sessionUser')
       return AuthEmptyState
     },
     openSignInAction: (state) => {

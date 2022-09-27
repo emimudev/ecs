@@ -1,17 +1,25 @@
 import { Link as RouterLink } from 'react-router-dom'
-import { Text } from '@chakra-ui/react'
+import {
+  Collapse,
+  Flex,
+  Icon,
+  Text,
+  useColorModeValue,
+  useDisclosure
+} from '@chakra-ui/react'
 import { MdExpandMore } from 'react-icons/md'
 import MobileItemSubNav from './MobileItemSubNav'
-
-const { useDisclosure, Flex, useColorModeValue, Collapse, Icon } = require('@chakra-ui/react')
-const { default: useNavItem } = require('./useNavItem')
+import useNavItem from './useNavItem'
+import { useNavbarContext } from '../Context'
 
 function MobileNavItem({ label, children, href, icon, onClick }) {
   const { isOpen, onToggle } = useDisclosure()
   const { match } = useNavItem({ href })
+  const { onToggle: toggleMobileNav } = useNavbarContext()
 
   const handleClick = () => {
     children && onToggle()
+    href && toggleMobileNav()
     onClick?.()
   }
 

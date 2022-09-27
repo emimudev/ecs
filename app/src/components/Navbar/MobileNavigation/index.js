@@ -61,7 +61,7 @@ function MobileNavigationFooter() {
       <MobileNavItem
         key='Ajustes'
         label='Ajustes'
-        onClick={() => console.log('hola')}
+        onClick={() => console.log('click')}
         icon={RiSettings4Fill}
       />
       <Authenticated>

@@ -9,21 +9,23 @@ const AuthContext = createContext()
 function AuthContextProvider({ children }) {
   const authSlice = useSelector(state => state.auth)
   const dispatcher = useDispatch()
+  const rememberMe = window.localStorage.getItem('sessionToken') !== null
   const mutation = useMutation(authAPI.verify, {
     onSuccess: (data, variables, context) => {
       const { user, token } = data
-      console.log({ data })
       dispatcher(loginAction({
         user,
-        sessionToken: token,
-        rememberMe: true
+        rememberMe,
+        sessionToken: token
       }))
     },
     onError: () => dispatcher(logoutAction())
   })
   const { sessionToken, user } = authSlice
 
-  if (sessionToken && user && mutation.isIdle) {
+  // If the user was successfully retrieved from localstorage
+  // then a check is made to confirm that the user can log in correctly.
+  if (rememberMe && sessionToken && user && mutation.isIdle) {
     mutation.mutate({ token: sessionToken })
   }
 

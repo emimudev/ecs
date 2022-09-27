@@ -16,9 +16,9 @@ function AnonymousHud() {
       </Flex>
       <Flex display={{ base: 'none', sm: 'flex' }}>
         <Button
-          variant='ghost'
           size={useBreakpointValue({ base: 'sm', md: 'md' })}
           onClick={openSignUpModal} borderRadius='full'
+          fontSize='sm'
         >
           Inscribirse
         </Button>
@@ -31,6 +31,7 @@ function AnonymousHud() {
         onClick={openLoginModal}
         rightIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
         borderRadius='full'
+        fontSize='sm'
       >
         {useBreakpointValue({ base: 'Publicar', md: 'Publicar anuncio' })}
       </Button>

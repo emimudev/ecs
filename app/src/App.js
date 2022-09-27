@@ -6,6 +6,7 @@ import { theme } from './theme'
 import store from 'redux/store'
 import AuthContextProvider from 'context/AuthContext'
 import Navbar from 'components/Navbar'
+import './services/interceptors'
 
 const queryClient = new QueryClient()
 

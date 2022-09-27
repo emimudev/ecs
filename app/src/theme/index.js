@@ -15,6 +15,6 @@ export const theme = extendTheme({
     })
   },
   sizes: {
-    navbar: '65px'
+    navbar: '70px'
   }
 })

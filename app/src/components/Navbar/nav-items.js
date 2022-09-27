@@ -1,5 +1,5 @@
 import { RiApps2Fill } from 'react-icons/ri'
-import { MdLocalOffer } from 'react-icons/md'
+import { MdLocalOffer, MdCompare } from 'react-icons/md'
 
 export const NAV_ITEMS = [
   {
@@ -22,5 +22,10 @@ export const NAV_ITEMS = [
     label: 'Ofertas del día',
     href: '/day-offers',
     icon: MdLocalOffer
+  },
+  {
+    label: 'Comparador',
+    href: '/compare',
+    icon: MdCompare
   }
 ]

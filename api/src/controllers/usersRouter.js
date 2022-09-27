@@ -1,9 +1,9 @@
-const bcrypt = require('bcrypt')
 const { userExtractor } = require('../middleware')
 const usersRouter = require('express').Router()
 const UserModel = require('../models/userModel')
 const { UsersService } = require('../services/UsersService')
 const { hasEmpty } = require('../utils/validators')
+const { isDuplicated } = require('./utils')
 
 usersRouter.get('/', userExtractor, async (request, response) => {
   const users = await UsersService.getAll()
@@ -34,22 +34,19 @@ usersRouter.delete('/:id', userExtractor, async (request, response, next) => {
 usersRouter.post('/', async (request, response, next) => {
   const { body } = request
   const { name, lastname, email, password } = body
-  const saltRounds = 10
+  const user = { name, lastname, email, password }
   if (hasEmpty([name, email, password])) {
-    return response.sendStatus(400)
+    return response.sendStatus(406)
   }
-  const passwordHash = await bcrypt.hash(password, saltRounds)
-  const newUser = new UserModel({
-    name,
-    lastname,
-    email,
-    password: passwordHash
-  })
   try {
-    const savedUser = await newUser.save()
+    const savedUser = await UsersService.create(user)
     response.json(savedUser)
-  } catch (err) {
-    response.status(400).json({ error: err })
+  } catch (error) {
+    if (isDuplicated(error)) {
+      response.status(400).json({ error: 'El correo ya se encuentra registrado' })
+    } else {
+      next(error)
+    }
   }
 })
 

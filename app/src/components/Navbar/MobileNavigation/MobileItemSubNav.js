@@ -1,6 +1,7 @@
 import { Link, Text } from '@chakra-ui/react'
 import useNavItem from './useNavItem'
 import { Link as RouterLink } from 'react-router-dom'
+import { useNavbarContext } from '../Context'
 
 function MobileItemSubNav({ label, href }) {
   const {
@@ -9,6 +10,7 @@ function MobileItemSubNav({ label, href }) {
     color,
     matchColor
   } = useNavItem({ href })
+  const { onToggle: toggleMobileNav } = useNavbarContext()
 
   return (
     <Link
@@ -22,6 +24,7 @@ function MobileItemSubNav({ label, href }) {
       _dark={{ _hover: { bg: !match && 'blackAlpha.300' }, bg: match && 'blue.900' }}
       _light={{ _hover: { bg: !match && 'blackAlpha.100' }, bg: match && 'blue.50' }}
       borderRightRadius='lg'
+      onClick={toggleMobileNav}
     >
       <Text noOfLines={1}>
         {label}

@@ -32,13 +32,14 @@ export default function Navbar() {
 const NavBarContainer = ({ children }) => {
   return (
     <Box
-      position='absolute'
+      position='sticky'
       top={0}
       left={0}
       right={0}
       _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
       _dark={{ bg: 'rgba(26, 32, 44, 0.85)' }}
       backdropFilter='saturate(180%) blur(6px)'
+      zIndex='sticky'
     >
       {children}
     </Box>

@@ -10,8 +10,14 @@ function login({ username, password }) {
     .then(res => res.data)
 }
 
-function signUp(userInfo) {
-  return axios.post(userInfo).then(res => res.data)
+function signUp({ name, lastname, email, password }) {
+  const user = { name, lastname, email, password }
+  return axios
+    .post(`${API_URL}/${ENTRY_POINT}/signup`, user)
+    .then(res => res.data)
+    .catch(err => {
+      throw err.response
+    })
 }
 
 function verify({ token }) {
