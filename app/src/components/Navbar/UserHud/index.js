@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux'
 import AuthenticatedHud from './AuthenticatedHud'
 import AnonymousHud from './AnonymousHud'
+import { useAuthState } from 'hooks/useAuthState'
 
 function UserHud() {
-  const { isLogged } = useSelector(state => state.auth)
+  const { isLogged } = useAuthState()
   return isLogged
     ? <AuthenticatedHud />
     : <AnonymousHud />

@@ -7,16 +7,16 @@ import {
   useBreakpointValue,
   Divider
 } from '@chakra-ui/react'
+import { useDispatch } from 'react-redux'
 import { CgLogOut } from 'react-icons/cg'
 import { RiSettings4Fill } from 'react-icons/ri'
 import { useNavbarContext } from '../Context'
 import { NAV_ITEMS } from '../nav-items'
+import { logoutAction } from 'redux/slices/auth.slice'
 import Authenticated from 'components/Authenticated'
 import Unauthenticated from 'components/Unauthenticated'
 import AuthenticatedHeader from './AuthenticatedHeader'
 import UnauthenticatedHeader from './UnauthenticatedHeader'
-import { useDispatch } from 'react-redux'
-import { logoutAction } from 'redux/states/auth.state'
 import MobileNavItem from './MobileNavItem'
 
 function MobileNavigation() {

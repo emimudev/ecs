@@ -1,6 +1,6 @@
 import { Box, Divider, Flex, Stack } from '@chakra-ui/react'
 import { TextBrand } from 'components/Brand'
-import { AuthModalTypes } from 'redux/states/auth.state'
+import { AuthModalTypes } from 'redux/states/authModal.state'
 import BrandLogo from 'components/Illustrations/BrandLogo'
 import SignInForm from './SignInForm'
 import SignUpForm from './SignUpForm'

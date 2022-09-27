@@ -3,12 +3,12 @@ import { useFormik } from 'formik'
 import { useEffect, useId, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
+import authAPI from 'services/authAPI'
 import {
   closeAuthModalAction,
   loginAction,
   openSignUpAction
-} from 'redux/states/auth.state'
-import authAPI from 'services/authAPI'
+} from 'redux/slices/auth.slice'
 
 const validationSchema = yup.object({
   username: yup
@@ -18,6 +18,11 @@ const validationSchema = yup.object({
     .string()
     .required('Este campo es requerido')
 })
+
+let pendingAction = null
+
+export const setPedingAction = (action) => { pendingAction = action }
+export const resetPedingAction = (action) => { pendingAction = null }
 
 function useSignInForm() {
   const [errorInfo, setErrorInfo] = useState({
@@ -80,6 +85,8 @@ function useSignInForm() {
       sessionToken: token,
       rememberMe: formik.values.rememberMe
     }))
+    pendingAction?.()
+    resetPedingAction()
     dispatcher(closeAuthModalAction())
   }
 

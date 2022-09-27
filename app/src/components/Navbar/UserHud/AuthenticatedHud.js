@@ -20,15 +20,16 @@ import {
   useBreakpointValue,
   Badge
 } from '@chakra-ui/react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { FaMoon, FaSun } from 'react-icons/fa'
 import { BiHelpCircle, BiMessageSquareAdd } from 'react-icons/bi'
 import { CgLogOut } from 'react-icons/cg'
-import { logoutAction } from 'redux/states/auth.state'
+import { logoutAction } from 'redux/slices/auth.slice'
+import { useAuthState } from 'hooks/useAuthState'
 import UserAvatar from 'components/UserAvatar'
 
 function AuthenticatedHud() {
-  const { user } = useSelector(state => state.auth)
+  const { user } = useAuthState()
   const { setColorMode } = useColorMode()
   const dispatcher = useDispatch()
   const titleMenuColor = useColorModeValue('blackAlpha.600', 'whiteAlpha.600')
@@ -41,7 +42,7 @@ function AuthenticatedHud() {
   )
 
   return (
-    <Stack direction='row' align='center' h='full' flexWrap='wrap'>
+    <Flex direction='row' align='center' h='full' gap={2}>
       <Button
         colorScheme='blue'
         borderRadius='full'
@@ -56,7 +57,7 @@ function AuthenticatedHud() {
       <Center h='50px' display={{ base: 'none', md: 'flex' }}>
         <Divider orientation='vertical' h='100%' />
       </Center>
-      <Menu>
+      <Menu autoSelect={false} strategy='absolute' gutter='14'>
         <MenuButton display={{ base: 'none', md: 'flex' }} _hover={{ filter: 'brightness(0.8)' }}>
           <UserAvatar user={user} w='40px' h='40px' selectable />
         </MenuButton>
@@ -79,8 +80,9 @@ function AuthenticatedHud() {
               </Stack>
             </Flex>
           </Flex>
-          <MenuDivider />
-          <MenuGroup color={titleMenuColor} title='Perfil'>
+          <MenuGroup color={titleMenuColor}>
+            <MenuGroupTitle>Perfil</MenuGroupTitle>
+            <MenuDivider my='0.3rem' />
             <MenuItem borderRadius='lg'>
               Mi cuenta
             </MenuItem>
@@ -88,14 +90,14 @@ function AuthenticatedHud() {
               Mis publicaciones
             </MenuItem>
           </MenuGroup>
-          <MenuDivider />
           <MenuOptionGroup
             color={titleMenuColor}
             defaultValue={getCurrentTheme()}
-            title='Aspecto'
             type='radio'
             onChange={handleChange}
           >
+            <MenuGroupTitle>Aspecto</MenuGroupTitle>
+            <MenuDivider my='0.3rem' />
             <MenuItemOption value='light' borderRadius='lg' alignItems='center'>
               <Stack direction='row' align='center' gap='1'>
                 <Icon h='4' w='4' as={FaSun} />
@@ -125,7 +127,23 @@ function AuthenticatedHud() {
           </MenuItem>
         </MenuList>
       </Menu>
-    </Stack>
+    </Flex>
+  )
+}
+
+function MenuGroupTitle({ children, ...props }) {
+  return (
+    <Flex
+      _dark={{ color: 'whiteAlpha.600' }}
+      _light={{ color: 'blackAlpha.600' }}
+      pl='1'
+      mt='0.4rem'
+      {...props}
+    >
+      <chakra.span fontWeight='semibold'>
+        {children}
+      </chakra.span>
+    </Flex>
   )
 }
 

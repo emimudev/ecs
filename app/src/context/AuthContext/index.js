@@ -1,17 +1,18 @@
 import { createContext, memo } from 'react'
 import { useMutation } from '@tanstack/react-query'
-import { useDispatch, useSelector } from 'react-redux'
-import { loginAction, logoutAction } from 'redux/states/auth.state'
+import { useDispatch } from 'react-redux'
+import { loginAction, logoutAction } from 'redux/slices/auth.slice'
+import { useAuthState } from 'hooks/useAuthState'
 import authAPI from 'services/authAPI'
 
 const AuthContext = createContext()
 
 function AuthContextProvider({ children }) {
-  const authSlice = useSelector(state => state.auth)
+  const authSlice = useAuthState()
   const dispatcher = useDispatch()
   const rememberMe = window.localStorage.getItem('sessionToken') !== null
   const mutation = useMutation(authAPI.verify, {
-    onSuccess: (data, variables, context) => {
+    onSuccess: (data) => {
       const { user, token } = data
       dispatcher(loginAction({
         user,

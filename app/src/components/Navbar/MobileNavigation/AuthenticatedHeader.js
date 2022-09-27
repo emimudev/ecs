@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux'
 import {
   Center,
   Flex, Icon,
@@ -11,9 +10,10 @@ import {
 } from '@chakra-ui/react'
 import { RiSettings4Fill } from 'react-icons/ri'
 import UserAvatar from 'components/UserAvatar'
+import { useAuthState } from 'hooks/useAuthState'
 
 function AuthenticatedHeader() {
-  const { user } = useSelector(store => store.auth)
+  const { user } = useAuthState()
   return (
     <>
       <Flex

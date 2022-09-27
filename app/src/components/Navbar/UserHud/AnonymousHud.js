@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux'
-import { Button, Icon, Stack, Flex, useBreakpointValue } from '@chakra-ui/react'
-import { BiMessageSquareAdd } from 'react-icons/bi'
-import { openSignInAction, openSignUpAction } from 'redux/states/auth.state'
+import { Button, Stack, Flex, useBreakpointValue, Center } from '@chakra-ui/react'
+import { openSignInAction, openSignUpAction } from 'redux/slices/auth.slice'
 import ColorModeSwitcher from 'components/ColorModeSwitcher'
+import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
 
 function AnonymousHud() {
   const dispatcher = useDispatch()
@@ -14,27 +14,29 @@ function AnonymousHud() {
       <Flex display={{ base: 'none', md: 'flex' }}>
         <ColorModeSwitcher />
       </Flex>
-      <Flex display={{ base: 'none', sm: 'flex' }}>
-        <Button
-          size={useBreakpointValue({ base: 'sm', md: 'md' })}
-          onClick={openSignUpModal} borderRadius='full'
-          fontSize='sm'
-        >
-          Inscribirse
-        </Button>
-      </Flex>
+      <Button
+        size={useBreakpointValue({ base: 'sm', md: 'md' })}
+        onClick={openSignUpModal} borderRadius='full'
+        fontSize='sm'
+        display={{ base: 'none', sm: 'flex' }}
+      >
+        Inscribirse
+      </Button>
       <Button
         colorScheme='blue'
         bg='blue.500'
         color='white'
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
         onClick={openLoginModal}
-        rightIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
         borderRadius='full'
         fontSize='sm'
+        display={{ base: 'none', sm: 'flex' }}
       >
-        {useBreakpointValue({ base: 'Publicar', md: 'Publicar anuncio' })}
+        Ingresar
       </Button>
+      <Center display={{ base: 'flex', sm: 'none' }}>
+        <MobileNavTrigger />
+      </Center>
     </Stack>
   )
 }

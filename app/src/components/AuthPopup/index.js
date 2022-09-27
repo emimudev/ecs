@@ -7,13 +7,14 @@ import {
   ModalOverlay,
   useBreakpointValue
 } from '@chakra-ui/react'
-import { useSelector, useDispatch } from 'react-redux'
-import { closeAuthModalAction } from 'redux/states/auth.state'
+import { useDispatch } from 'react-redux'
+import { closeAuthModalAction } from 'redux/slices/auth.slice'
+import { useAuthState } from 'hooks/useAuthState'
 import AuthForm from 'components/AuthForm'
 
 function LoginPopup() {
   const dispatcher = useDispatch()
-  const { authModal: { isOpened, type } } = useSelector(store => store.auth)
+  const { authModal: { isOpened, type } } = useAuthState()
   const closeModal = () => dispatcher(closeAuthModalAction())
 
   return (

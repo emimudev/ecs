@@ -67,6 +67,7 @@ function DesktopNavItem({ navItem }) {
               _hover={{ textDecor: 'none' }}
             >
               <Button
+                lineHeight='1'
                 {...navButtonProps}
                 rightIcon={rightIcon({ isOpen })}
                 iconSpacing={2}

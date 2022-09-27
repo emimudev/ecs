@@ -3,7 +3,7 @@ import { Button, Stack, Text, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
 import { useDispatch } from 'react-redux'
 import * as yup from 'yup'
-import { closeAuthModalAction, loginAction, openSignInAction } from 'redux/states/auth.state'
+import { closeAuthModalAction, loginAction, openSignInAction } from 'redux/slices/auth.slice'
 import FormikFormControl from 'components/FormikFormControl'
 import { AuthFormHeader } from '..'
 import authAPI from 'services/authAPI'
@@ -38,7 +38,6 @@ function SignUpForm() {
 
   function handleSubmit(values, { setSubmitting }) {
     setErrorInfo(ErrorInfoEmpty)
-    console.log({ values })
     authAPI.signUp(values)
       .then(signUpInfo => signUp(signUpInfo))
       .catch(({ status }) => handleFormError({ status }))
@@ -47,7 +46,6 @@ function SignUpForm() {
 
   const signUp = (signUpInfo) => {
     const { user, token } = signUpInfo
-    console.log({ signUpInfo })
     dispatcher(loginAction({
       user,
       sessionToken: token,

@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { Button, Divider, Flex, Icon, useBreakpointValue, VStack } from '@chakra-ui/react'
 import { RiLoginCircleLine, RiUser3Line } from 'react-icons/ri'
-import { openSignInAction, openSignUpAction } from 'redux/states/auth.state'
+import { openSignInAction, openSignUpAction } from 'redux/slices/auth.slice'
 
 function UnauthenticatedHeader() {
   const dispatcher = useDispatch()
