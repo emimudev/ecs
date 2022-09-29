@@ -5,7 +5,8 @@ import { Provider } from 'react-redux'
 import { theme } from './theme'
 import store from 'redux/store'
 import AuthContextProvider from 'context/AuthContext'
-import Navbar from 'components/Navbar'
+import PageLayout from 'components/PageLayout'
+import './theme/global.styles.css'
 import './services/axios.interceptors'
 
 const queryClient = new QueryClient()
@@ -18,7 +19,7 @@ function App() {
           <AuthContextProvider>
             <BrowserRouter>
               <Routes>
-                <Route path='*' element={<Navbar />} />
+                <Route path='*' element={<PageLayout />} />
               </Routes>
             </BrowserRouter>
           </AuthContextProvider>

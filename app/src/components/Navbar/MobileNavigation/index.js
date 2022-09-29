@@ -8,7 +8,7 @@ import {
   Divider
 } from '@chakra-ui/react'
 import { useDispatch } from 'react-redux'
-import { CgLogOut } from 'react-icons/cg'
+import { IoMdLogOut } from 'react-icons/io'
 import { RiSettings4Fill } from 'react-icons/ri'
 import { useNavbarContext } from '../Context'
 import { NAV_ITEMS } from '../nav-items'
@@ -69,7 +69,7 @@ function MobileNavigationFooter() {
           key='Salir'
           label='Cerrar sesión'
           onClick={handleLogout}
-          icon={CgLogOut}
+          icon={IoMdLogOut}
         />
       </Authenticated>
     </Stack>

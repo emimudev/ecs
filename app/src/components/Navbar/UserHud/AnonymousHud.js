@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux'
-import { Button, Stack, Flex, useBreakpointValue, Center } from '@chakra-ui/react'
+import { Button, Stack, Flex, useBreakpointValue, Center, Icon } from '@chakra-ui/react'
+import { IoMdLogIn } from 'react-icons/io'
 import { openSignInAction, openSignUpAction } from 'redux/slices/auth.slice'
 import ColorModeSwitcher from 'components/ColorModeSwitcher'
 import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
@@ -16,7 +17,8 @@ function AnonymousHud() {
       </Flex>
       <Button
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
-        onClick={openSignUpModal} borderRadius='full'
+        onClick={openSignUpModal}
+        borderRadius='full'
         fontSize='sm'
         display={{ base: 'none', sm: 'flex' }}
       >
@@ -31,6 +33,7 @@ function AnonymousHud() {
         borderRadius='full'
         fontSize='sm'
         display={{ base: 'none', sm: 'flex' }}
+        leftIcon={<Icon as={IoMdLogIn} h='5' w='5' />}
       >
         Ingresar
       </Button>

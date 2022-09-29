@@ -1,3 +1,7 @@
+import { useDispatch } from 'react-redux'
+import { FaMoon, FaSun } from 'react-icons/fa'
+import { BiHelpCircle, BiMessageSquareAdd } from 'react-icons/bi'
+import { IoMdLogOut } from 'react-icons/io'
 import {
   Button,
   Text,
@@ -20,10 +24,6 @@ import {
   useBreakpointValue,
   Badge
 } from '@chakra-ui/react'
-import { useDispatch } from 'react-redux'
-import { FaMoon, FaSun } from 'react-icons/fa'
-import { BiHelpCircle, BiMessageSquareAdd } from 'react-icons/bi'
-import { CgLogOut } from 'react-icons/cg'
 import { logoutAction } from 'redux/slices/auth.slice'
 import { useAuthState } from 'hooks/useAuthState'
 import UserAvatar from 'components/UserAvatar'
@@ -46,9 +46,12 @@ function AuthenticatedHud() {
     <Flex direction='row' align='center' h='full' gap={2}>
       <Button
         colorScheme='blue'
+        bg='blue.500'
+        color='white'
         borderRadius='full'
-        leftIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
+        rightIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
+        fontSize='sm'
         lineHeight='1'
         display={{ base: 'none', sm: 'flex' }}
       >
@@ -61,7 +64,10 @@ function AuthenticatedHud() {
         <Divider orientation='vertical' h='100%' />
       </Center>
       <Menu autoSelect={false} strategy='absolute' gutter='14'>
-        <MenuButton display={{ base: 'none', md: 'flex' }} _hover={{ filter: 'brightness(0.8)' }}>
+        <MenuButton
+          display={{ base: 'none', md: 'flex' }}
+          _hover={{ filter: 'brightness(0.8)' }}
+        >
           <UserAvatar user={user} w='40px' h='40px' selectable />
         </MenuButton>
         <MenuList
@@ -125,7 +131,7 @@ function AuthenticatedHud() {
             alignItems='center'
             onClickCapture={handleLogout}
           >
-            <Icon h='5' w='5' as={CgLogOut} />
+            <Icon h='5' w='5' as={IoMdLogOut} />
             Cerrar sesión
           </MenuItem>
         </MenuList>

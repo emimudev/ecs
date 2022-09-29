@@ -9,28 +9,41 @@ import {
 import { Link } from 'react-router-dom'
 import BrandLogo from 'components/Illustrations/BrandLogo'
 
-function Brand({ to = '/' }) {
+function Brand({ to = '/', orientation = 'row' }) {
+  const Content = (
+    <Stack alignItems='center' direction={orientation}>
+      <Center w='35px' h='35px' color='blue.500'>
+        <BrandLogo />
+      </Center>
+      <Center fontSize={orientation === 'column' ? '2xl' : null}>
+        <TextBrand />
+      </Center>
+    </Stack>
+  )
+
   return (
-    <Center cursor={to && 'pointer'} fontSize={useBreakpointValue({ base: '18px', md: '22px' })}>
-      <Link to={to ?? ''}>
-        <Stack alignItems='center' direction='row'>
-          <Center w='35px' h='35px' color='blue.500'>
-            <BrandLogo />
-          </Center>
-          <Center>
-            <TextBrand />
-          </Center>
-        </Stack>
-      </Link>
+    <Center
+      cursor={to ? 'pointer' : 'default'}
+      fontSize={useBreakpointValue({ base: '18px', md: '22px' })}
+    >
+      {to
+        ? (
+          <Link to={to ?? '#'} style={{ cursor: to ? 'pointer' : 'default' }}>
+            {Content}
+          </Link>
+        ) //eslint-disable-line
+        : Content}
     </Center>
   )
 }
 
-export function TextBrand() {
+function TextBrand() {
   return (
     <Flex fontFamily='heading'>
       <HighlightedContent>E</HighlightedContent>
-      <Text fontWeight='bold' color={useColorModeValue('gray.600', 'gray.300')}>lectro</Text>
+      <Text fontWeight='bold' color={useColorModeValue('gray.600', 'gray.300')}>
+        lectro
+      </Text>
       <HighlightedContent>CAR</HighlightedContent>
     </Flex>
   )
@@ -40,7 +53,7 @@ const HighlightedContent = ({ children }) => {
   return (
     <Text
       display='inline-flex'
-      color={useColorModeValue('blue.500', 'blue.500')}
+      color={useColorModeValue('blue.500', 'blue.300')}
       fontWeight='bold'
     >
       {children}
@@ -49,3 +62,4 @@ const HighlightedContent = ({ children }) => {
 }
 
 export default Brand
+export { TextBrand }
