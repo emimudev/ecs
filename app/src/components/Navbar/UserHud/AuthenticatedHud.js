@@ -1,9 +1,8 @@
 import { useDispatch } from 'react-redux'
 import { FaMoon, FaSun } from 'react-icons/fa'
-import { BiHelpCircle, BiMessageSquareAdd } from 'react-icons/bi'
+import { BiHelpCircle } from 'react-icons/bi'
 import { IoMdLogOut } from 'react-icons/io'
 import {
-  Button,
   Text,
   Icon,
   Menu,
@@ -21,13 +20,13 @@ import {
   useColorModeValue,
   Divider,
   Center,
-  useBreakpointValue,
   Badge
 } from '@chakra-ui/react'
 import { logoutAction } from 'redux/slices/auth.slice'
 import { useAuthState } from 'hooks/useAuthState'
 import UserAvatar from 'components/UserAvatar'
 import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
+import PublishAdButton from 'components/PublishAdButton'
 
 function AuthenticatedHud() {
   const { user } = useAuthState()
@@ -44,19 +43,7 @@ function AuthenticatedHud() {
 
   return (
     <Flex direction='row' align='center' h='full' gap={2}>
-      <Button
-        colorScheme='blue'
-        bg='blue.500'
-        color='white'
-        borderRadius='full'
-        rightIcon={<Icon h={5} w={5} as={BiMessageSquareAdd} />}
-        size={useBreakpointValue({ base: 'sm', md: 'md' })}
-        fontSize='sm'
-        lineHeight='1'
-        display={{ base: 'none', sm: 'flex' }}
-      >
-        {useBreakpointValue({ base: 'Publicar', md: 'Publicar anuncio' })}
-      </Button>
+      <PublishAdButton />
       <Flex display={{ base: 'flex', sm: 'none', md: 'none' }}>
         <MobileNavTrigger />
       </Flex>

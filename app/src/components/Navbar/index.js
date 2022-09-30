@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Box, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
 import MobileNavigation from './MobileNavigation'
 import Brand from '../Brand'
@@ -7,7 +8,7 @@ import UserHud from './UserHud'
 import AuthPopup from 'components/AuthPopup'
 import MobileNavTrigger from './MobileNavigation/MobileNavTrigger'
 
-export default function Navbar() {
+function Navbar() {
   return (
     <NavbarContextProvider>
       <NavBarContainer>
@@ -64,3 +65,5 @@ const NavbarFlex = ({ children }) => {
     </Flex>
   )
 }
+
+export default memo(Navbar)

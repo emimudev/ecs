@@ -1,6 +1,8 @@
+import { memo } from 'react'
 import {
   Box,
   Container,
+  Flex,
   Link,
   Stack,
   Text,
@@ -25,8 +27,10 @@ function PageFooter() {
         justify='center'
         align='center'
       >
-        <Brand orientation='column' to={null} />
-        <Stack direction='row' spacing={6}>
+        <Flex display={{ base: 'none', sm: 'flex' }}>
+          <Brand orientation='column' to={null} />
+        </Flex>
+        <Stack direction={{ base: 'column', sm: 'row' }} spacing={6} w={{ base: 'full', sm: 'auto' }}>
           <Link as={RouterLink} to='#'>Inicio</Link>
           <Link as={RouterLink} to='#'>Sobre nosotros</Link>
           <Link as={RouterLink} to='#'>Legal</Link>
@@ -43,15 +47,16 @@ function PageFooter() {
           as={Stack}
           maxW='7xl'
           py={4}
-          direction={{ base: 'column', md: 'row' }}
-          spacing={4}
+          direction='row'
+          gap={3}
           justify={{ base: 'center', md: 'space-between' }}
-          align={{ base: 'center', md: 'center' }}
+          align='center'
+          flexWrap='wrap-reverse'
         >
-          <Text>
+          <Text textAlign={{ base: 'center', sm: 'left' }}>
             © 2022 ElectroCar Sales. Todos los derechos reservados
           </Text>
-          <Stack direction='row' spacing={6}>
+          <Stack direction='row' spacing={6} wrap='wrap'>
             <SocialButton label='Twitter' href='#'>
               <FaTwitter />
             </SocialButton>
@@ -68,4 +73,4 @@ function PageFooter() {
   )
 }
 
-export default PageFooter
+export default memo(PageFooter)
