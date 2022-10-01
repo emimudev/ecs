@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Box, Flex, Spacer, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Spacer, useBreakpointValue, useColorModeValue } from '@chakra-ui/react'
 import MobileNavigation from './MobileNavigation'
 import Brand from '../Brand'
 import NavbarContextProvider from './Context'
@@ -40,6 +40,7 @@ const NavBarContainer = ({ children }) => {
       _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
       _dark={{ bg: 'rgba(26, 32, 44, 0.85)' }}
       backdropFilter='saturate(180%) blur(6px)'
+      shadow='md'
       zIndex='sticky'
     >
       {children}
@@ -51,13 +52,10 @@ const NavbarFlex = ({ children }) => {
   return (
     <Flex
       color={useColorModeValue('gray.600', 'white')}
-      height='navbar'
+      h={useBreakpointValue({ base: '60px', sm: '70px' })}
       overflow='hidden'
       py={{ base: 2 }}
       px={{ base: 4 }}
-      borderBottom={1}
-      borderStyle='solid'
-      borderColor={useColorModeValue('gray.200', 'gray.900')}
       align='center'
       gap='10px'
     >

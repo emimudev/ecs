@@ -16,21 +16,29 @@ import SocialButton from 'components/SocialButton'
 function PageFooter() {
   return (
     <Box
-      bg={useColorModeValue('gray.50', 'rgba(26, 32, 44, 0.85)')}
+      bg={useColorModeValue('white', 'rgba(26, 32, 44, 0.85)')}
       color={useColorModeValue('gray.700', 'gray.200')}
+      _light={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-300)' }}
+      _dark={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-700)' }}
     >
       <Container
         as={Stack}
         maxW='7xl'
         py={4}
-        spacing={4}
+        gap='2'
         justify='center'
         align='center'
       >
         <Flex display={{ base: 'none', sm: 'flex' }}>
           <Brand orientation='column' to={null} />
         </Flex>
-        <Stack direction={{ base: 'column', sm: 'row' }} spacing={6} w={{ base: 'full', sm: 'auto' }}>
+        <Stack
+          direction={{ base: 'column', sm: 'row' }}
+          style={{ marginTop: '0' }}
+          spacing={{ base: 2, sm: 6 }}
+          w={{ base: 'full', sm: 'auto' }}
+          fontSize='sm'
+        >
           <Link as={RouterLink} to='#'>Inicio</Link>
           <Link as={RouterLink} to='#'>Sobre nosotros</Link>
           <Link as={RouterLink} to='#'>Legal</Link>
@@ -53,7 +61,7 @@ function PageFooter() {
           align='center'
           flexWrap='wrap-reverse'
         >
-          <Text textAlign={{ base: 'center', sm: 'left' }}>
+          <Text textAlign={{ base: 'center', sm: 'left' }} fontSize='sm'>
             © 2022 ElectroCar Sales. Todos los derechos reservados
           </Text>
           <Stack direction='row' spacing={6} wrap='wrap'>

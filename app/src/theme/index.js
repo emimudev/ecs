@@ -13,8 +13,5 @@ export const theme = extendTheme({
         bg: mode('#EDF2F7', '#161c26')(props)
       }
     })
-  },
-  sizes: {
-    navbar: '70px'
   }
 })

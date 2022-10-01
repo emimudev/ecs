@@ -50,7 +50,7 @@ function AuthenticatedHud() {
       <Center h='50px' display={{ base: 'none', md: 'flex' }}>
         <Divider orientation='vertical' h='100%' />
       </Center>
-      <Menu autoSelect={false} strategy='absolute' gutter='14'>
+      <Menu autoSelect={false} gutter='15'>
         <MenuButton
           display={{ base: 'none', md: 'flex' }}
           _hover={{ filter: 'brightness(0.8)' }}

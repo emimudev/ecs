@@ -15,6 +15,7 @@ function PublishAdButton({ btn = null, text = 'Publicar anuncio', showIcon = tru
           color='white'
           borderRadius='full'
           rightIcon={showIcon && <Icon h={5} w={5} as={BiMessageSquareAdd} />}
+          size={{ base: 'sm', md: 'md' }}
           fontSize='sm'
           lineHeight='1'
           display={{ base: 'none', sm: 'flex' }}

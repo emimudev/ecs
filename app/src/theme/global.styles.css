@@ -1,8 +1,14 @@
-html, body, #root {
+html, body {
   height: 100%;
 }
 
+body {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 #root {
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

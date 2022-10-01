@@ -11,7 +11,11 @@ import BrandLogo from 'components/Illustrations/BrandLogo'
 
 function Brand({ to = '/', orientation = 'row' }) {
   const Content = (
-    <Stack alignItems='center' direction={orientation}>
+    <Stack
+      alignItems='center'
+      direction={orientation}
+      spacing={orientation === 'row' ? 2 : 0}
+    >
       <Center w='35px' h='35px' color='blue.500'>
         <BrandLogo />
       </Center>
@@ -26,13 +30,15 @@ function Brand({ to = '/', orientation = 'row' }) {
       cursor={to ? 'pointer' : 'default'}
       fontSize={useBreakpointValue({ base: '18px', md: '22px' })}
     >
-      {to
-        ? (
-          <Link to={to ?? '#'} style={{ cursor: to ? 'pointer' : 'default' }}>
-            {Content}
-          </Link>
-        ) //eslint-disable-line
-        : Content}
+      {
+        to
+          ? (
+            <Link to={to ?? '#'} style={{ cursor: to ? 'pointer' : 'default' }}>
+              {Content}
+            </Link>
+          ) //eslint-disable-line
+          : Content
+      }
     </Center>
   )
 }
