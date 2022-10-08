@@ -6,7 +6,7 @@ function useNavItem({ href }) {
   const match = href && matchPath(href, location.pathname)
   const borderColor = useColorModeValue('gray.200', 'gray.700')
   const color = useColorModeValue('gray.700', 'gray.300')
-  const matchColor = useColorModeValue('blue.600', 'blue.200')
+  const matchColor = useColorModeValue('pink.600', 'pink.200')
 
   return {
     match,

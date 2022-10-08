@@ -25,8 +25,8 @@ function AnonymousHud() {
         Inscribirse
       </Button>
       <Button
-        colorScheme='blue'
-        bg='blue.500'
+        colorScheme='pink'
+        bg='pink.500'
         color='white'
         size={useBreakpointValue({ base: 'sm', md: 'md' })}
         onClick={openLoginModal}

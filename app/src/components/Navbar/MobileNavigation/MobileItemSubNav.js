@@ -17,12 +17,12 @@ function MobileItemSubNav({ label, href }) {
       as={RouterLink}
       to={href ?? '#'}
       pl={6} key={label} py={2} href={href} w='full' borderStyle='solid'
-      borderColor={match ? 'blue.500' : borderColor}
+      borderColor={match ? 'pink.500' : borderColor}
       borderLeftWidth={3}
       ml='-3px'
       color={match ? matchColor : color}
-      _dark={{ _hover: { bg: !match && 'blackAlpha.300' }, bg: match && 'blue.900' }}
-      _light={{ _hover: { bg: !match && 'blackAlpha.100' }, bg: match && 'blue.50' }}
+      _dark={{ _hover: { bg: !match && 'blackAlpha.300' }, bg: match && 'pink.900' }}
+      _light={{ _hover: { bg: !match && 'blackAlpha.100' }, bg: match && 'pink.50' }}
       borderRightRadius='lg'
       onClick={toggleMobileNav}
     >

@@ -1,8 +1,8 @@
 import { Flex } from '@chakra-ui/react'
-import { Route, Routes } from 'react-router-dom'
+import { Outlet } from 'react-router-dom'
 import Navbar from 'components/Navbar'
-import PageFooter from 'components/PageFooter'
 import MobileBottomNav from 'components/MobileBottomNav'
+import PageFooter from './PageFooter'
 
 function PageLayout() {
   return (
@@ -13,17 +13,8 @@ function PageLayout() {
         direction='column'
         flex='1 1 auto'
         minH='350px'
-        padding={{ base: '0 16px', lg: '0 calc(3.5vw + 24px)' }}
       >
-        <Routes>
-          <Route
-            path='/publish' element={
-              <div style={{ fontSize: '20px' }}>
-                <h1>Publicar nuevo anuncio</h1>
-              </div>
-            }
-          />
-        </Routes>
+        <Outlet />
       </Flex>
       <PageFooter />
       <MobileBottomNav />
@@ -32,3 +23,7 @@ function PageLayout() {
 }
 
 export default PageLayout
+export { default as PageContainer } from './PageContainer'
+export { default as PageBody } from './PageBody'
+export { default as PageSection } from './PageSection'
+export { default as PageFooter } from './PageFooter'

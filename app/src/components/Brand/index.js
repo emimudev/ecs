@@ -16,7 +16,7 @@ function Brand({ to = '/', orientation = 'row' }) {
       direction={orientation}
       spacing={orientation === 'row' ? 2 : 0}
     >
-      <Center w='35px' h='35px' color='blue.500'>
+      <Center w='35px' h='35px' color={useColorModeValue('pink.500', 'pink.300')}>
         <BrandLogo />
       </Center>
       <Center fontSize={orientation === 'column' ? '2xl' : null}>
@@ -59,7 +59,7 @@ const HighlightedContent = ({ children }) => {
   return (
     <Text
       display='inline-flex'
-      color={useColorModeValue('blue.500', 'blue.300')}
+      color={useColorModeValue('pink.500', 'pink.300')}
       fontWeight='bold'
     >
       {children}

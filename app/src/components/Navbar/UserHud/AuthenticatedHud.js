@@ -24,9 +24,9 @@ import {
 } from '@chakra-ui/react'
 import { logoutAction } from 'redux/slices/auth.slice'
 import { useAuthState } from 'hooks/useAuthState'
+import { PublishAdButton } from 'components/PublishAd'
 import UserAvatar from 'components/UserAvatar'
 import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
-import PublishAdButton from 'components/PublishAdButton'
 
 function AuthenticatedHud() {
   const { user } = useAuthState()
@@ -58,8 +58,14 @@ function AuthenticatedHud() {
           <UserAvatar user={user} w='40px' h='40px' selectable />
         </MenuButton>
         <MenuList
-          _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
-          _dark={{ bg: 'rgba(26, 32, 44, 0.85)' }} fontSize='sm' px={2} maxW='200px'
+          // _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
+          _dark={{ bg: 'rgb(26, 32, 44)' }}
+          fontSize='sm'
+          px={2}
+          maxW='200px'
+          border='none'
+          shadow='xl'
+          borderTopRadius='none'
         >
           <Flex p={2} justify='center'>
             <Flex gap={2}>
@@ -107,7 +113,7 @@ function AuthenticatedHud() {
               </Stack>
             </MenuItemOption>
           </MenuOptionGroup>
-          <MenuDivider />
+          <MenuDivider borderColor='chakra-border-color' />
           <MenuItem borderRadius='lg' gap='4' alignItems='center'>
             <Icon h='5' w='5' as={BiHelpCircle} />
             Ayuda

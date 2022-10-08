@@ -11,6 +11,8 @@ const SocialButton = ({ children, label, href }) => {
       cursor='pointer'
       as={RouterLink}
       to={href ?? ''}
+      target='_blank'
+      rel='noreferrer'
       href={href}
       display='inline-flex'
       alignItems='center'

@@ -6,7 +6,7 @@ import Authenticated from 'components/Authenticated'
 import Unauthenticated from 'components/Unauthenticated'
 import { useDispatch } from 'react-redux'
 import { openSignInAction } from 'redux/slices/auth.slice'
-import PublishAdButton from 'components/PublishAdButton'
+import { PublishAdButton } from 'components/PublishAd'
 
 function MobileBottomNav() {
   const dispatcher = useDispatch()
@@ -52,23 +52,9 @@ function MobileBottomNav() {
           Buscar
         </BottomNavItem>
         <Spacer flex='1 1 100%' />
-        <PublishAdButton btn={
-          ({ onClick }) =>
-            <Button
-              colorScheme='blue'
-              position='absolute'
-              top='calc(-15px)'
-              left='calc(50% - 25px)'
-              w='50px'
-              h='50px'
-              borderRadius='full'
-              fontSize='xs'
-              onClick={onClick}
-            >
-              <Icon as={BiPlusCircle} h='6' w='6' />
-            </Button>
-        }
-        />
+        <PublishAdButton>
+          <PlusButton />
+        </PublishAdButton>
         <BottomNavItem icon={BiBell} showOnlyIcon to='/notifications'>
           Notificaciones
         </BottomNavItem>
@@ -79,6 +65,22 @@ function MobileBottomNav() {
     </Flex>
   )
 }
+
+const PlusButton = ({ onClick }) => (
+  <Button
+    colorScheme='pink'
+    position='absolute'
+    top='calc(-15px)'
+    left='calc(50% - 25px)'
+    w='50px'
+    h='50px'
+    borderRadius='full'
+    fontSize='xs'
+    onClick={onClick}
+  >
+    <Icon as={BiPlusCircle} h='6' w='6' />
+  </Button>
+)
 
 function BottomNavItem({
   children,
@@ -133,7 +135,7 @@ function BottomNavItem({
           }
         }}
       >
-        {icon && <Icon as={icon} h='6' w='6' color={match && 'blue.500'} />}
+        {icon && <Icon as={icon} h='6' w='6' color={match && 'pink.500'} />}
         {!showOnlyIcon && children}
       </Link>
     </Flex>

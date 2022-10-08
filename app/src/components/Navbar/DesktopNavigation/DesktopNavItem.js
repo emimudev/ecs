@@ -1,7 +1,6 @@
 import { useCallback, useRef } from 'react'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 import {
-  Link as FancyLink,
   Button,
   Icon,
   Popover,
@@ -17,28 +16,15 @@ function DesktopNavItem({ navItem }) {
   const location = useLocation()
   const match = navItem.href && matchPath(navItem.href, location.pathname)
   const linkBgColor = useColorModeValue(
-    match ? 'blue.100' : null,
-    match ? 'blue.800' : null
+    match ? 'gray.200' : null,
+    match ? 'whiteAlpha.300' : null
   )
   const linkHoverBgColor = useColorModeValue(
-    match ? 'blue.100' : 'gray.100',
-    match ? 'blue.800' : 'whiteAlpha.200'
+    match ? 'gray.200' : 'gray.100',
+    match ? 'whiteAlpha.300' : 'whiteAlpha.200'
   )
   const popoverContentBgColor = useColorModeValue('white', 'gray.800')
   const ref = useRef()
-
-  const navButtonProps = {
-    leftIcon: navItem.icon && <Icon as={navItem.icon} h={5} w={5} />,
-    variant: 'ghost',
-    size: 'sm',
-    bg: linkBgColor,
-    fontWeight: match && 'bold',
-    cursor: navItem.children ? 'default' : 'pointer',
-    borderRadius: 'full',
-    _hover: { bg: linkHoverBgColor },
-    _active: { bg: linkHoverBgColor },
-    _groupHover: { bg: linkHoverBgColor }
-  }
 
   const rightIcon = useCallback(({ isOpen }) => (
     navItem.children && (
@@ -61,28 +47,32 @@ function DesktopNavItem({ navItem }) {
       {({ isOpen, onClose }) => (
         <>
           <PopoverTrigger>
-            <FancyLink
+            <Button
               as={Link}
               to={navItem.href ?? '#'}
-              _hover={{ textDecor: 'none' }}
+              leftIcon={navItem.icon && <Icon as={navItem.icon} h={4} w={4} />}
+              lineHeight='1'
+              rightIcon={rightIcon({ isOpen })}
+              iconSpacing={2}
+              colorScheme='gray'
+              fontSize='sm'
+              borderRadius='full'
+              bg={linkBgColor}
+              _hover={{ bg: linkHoverBgColor }}
+              variant='ghost'
             >
-              <Button
-                lineHeight='1'
-                {...navButtonProps}
-                rightIcon={rightIcon({ isOpen })}
-                iconSpacing={2}
-              >
-                {navItem.label}
-              </Button>
-            </FancyLink>
+              {navItem.label}
+            </Button>
           </PopoverTrigger>
           {navItem.children && (
             <PopoverContent
-              shadow='lg'
+              shadow='xl'
               bg={popoverContentBgColor}
               p={3}
               rounded='lg'
               minW='sm'
+              border='none'
+              borderTopRadius='none'
             >
               <Stack>
                 {navItem.children.map((child) => (

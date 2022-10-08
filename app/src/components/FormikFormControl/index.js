@@ -26,10 +26,11 @@ function FormikFormControl({
   const labelColorDark = showLabelError ? 'red.200' : null
 
   return (
-    <FormControl isInvalid={isTouched && error}>
+    <FormControl isInvalid={isTouched && error} fontSize='sm'>
       <FormLabel
         _dark={{ color: labelColorDark }}
         _light={{ color: labelColorLight }}
+        fontSize='sm'
       >
         {label}
       </FormLabel>

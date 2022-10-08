@@ -13,8 +13,8 @@ import { Link as RouterLink, matchPath, useLocation } from 'react-router-dom'
 function DesktopSubNavItem({ label, href, subLabel, onClose = () => { } }) {
   const location = useLocation()
   const match = href && matchPath(href, location.pathname)
-  const matchColorStyle = useColorModeValue('blue.500', 'blue.400')
-  const matchBgStyle = useColorModeValue('blue.50', 'gray.900')
+  const matchColorStyle = useColorModeValue('pink.500', 'pink.400')
+  const matchBgStyle = useColorModeValue('pink.50', 'gray.900')
   const bgHover = useColorModeValue('gray.100', 'gray.700')
   const matchBgHoverStyle = match ? matchBgStyle : bgHover
 
@@ -52,7 +52,7 @@ function DesktopSubNavItem({ label, href, subLabel, onClose = () => { } }) {
           align='center'
           flex={1}
         >
-          <Icon color='blue.400' w={5} h={5} as={MdChevronRight} />
+          <Icon color='pink.400' w={5} h={5} as={MdChevronRight} />
         </Flex>
       </Stack>
     </Link>

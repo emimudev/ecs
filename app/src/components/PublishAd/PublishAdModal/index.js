@@ -82,7 +82,7 @@ function PublishAdModal({ isOpened = false, onClose }) {
           <Button variant='ghost' onClick={onClose}>
             Cancelar
           </Button>
-          <Button colorScheme='blue' isDisabled={value === ''} onClick={handleNext}>
+          <Button colorScheme='pink' isDisabled={value === ''} onClick={handleNext}>
             Siguiente
           </Button>
         </ModalFooter>

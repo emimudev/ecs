@@ -12,3 +12,23 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.slick-slider.slider-allow-overflow.slick-initialized .slick-list {
+  overflow: visible;
+}
+
+.slick-slide {
+  padding: 10px;
+}
+
+.slick-slide:not(.slick-active) .slick-item {
+  filter: brightness(0.7);
+  transition: filter 0.5s ease-in;
+} 
+
+.slick-arrow.slick-prev.slick-disabled,
+.slick-arrow.slick-next.slick-disabled {
+  cursor: default;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}

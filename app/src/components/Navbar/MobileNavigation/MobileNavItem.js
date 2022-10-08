@@ -35,8 +35,8 @@ function MobileNavItem({ label, children, href, icon, onClick }) {
         _hover={{
           textDecoration: 'none'
         }}
-        _dark={{ _hover: { bg: !match && 'blackAlpha.300' }, bg: match && 'blue.900' }}
-        _light={{ _hover: { bg: !match && 'blackAlpha.100' }, bg: match && 'blue.50' }}
+        _dark={{ _hover: { bg: !match && 'blackAlpha.300' }, bg: match && 'pink.900' }}
+        _light={{ _hover: { bg: !match && 'blackAlpha.100' }, bg: match && 'pink.50' }}
         onClickCapture={handleClick}
       >
         <Flex gap={4} direction='row' align='center'>

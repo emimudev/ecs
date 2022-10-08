@@ -14,8 +14,8 @@ function SignInForm() {
 
   return (
     <form onSubmit={formik.handleSubmit} autoComplete='off'>
-      <AuthFormHeader />
-      <Stack spacing={3}>
+      <AuthFormHeader title='Iniciar sesión' />
+      <Stack spacing={3} fontSize='sm'>
         <FormikFormControl
           formik={formik}
           name='username'
@@ -29,22 +29,24 @@ function SignInForm() {
           placeholder='Introduce tu contraseña'
           label='Contraseña'
           variant='password'
+          inputProps={{ autoComplete: 'current-password' }}
         />
         <Flex justify='space-between' flexWrap='wrap'>
           <Checkbox
             name='rememberMe'
             checked={formik.values.rememberMe}
             onChange={formik.handleChange}
+            fontSize='sm'
           >
-            Recordarme
+            <span style={{ fontSize: '14px' }}>Recordarme</span>
           </Checkbox>
           <Link>¿Olvidaste tu contraseña?</Link>
         </Flex>
         <Stack spacing={2} pt='2'>
           <Button
             type='submit'
-            colorScheme='blue'
-            bg='blue.500'
+            colorScheme='pink'
+            bg='pink.500'
             color='white'
             isLoading={formik.isSubmitting}
             loadingText='Iniciando sesión...'
@@ -57,7 +59,7 @@ function SignInForm() {
             <Button
               lineHeight={1}
               variant='link'
-              color='blue.400'
+              color='pink.400'
               onClickCapture={openSignUpForm}
             >
               Crear cuenta nueva
