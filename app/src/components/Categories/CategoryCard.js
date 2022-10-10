@@ -53,7 +53,7 @@ function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }
           </chakra.h3>
         </Flex>
         <Flex flexDirection='column' gap={3} flex='1 1 auto'>
-          <chakra.span flex='1 1 auto' display='flex'>
+          <chakra.span flex='1 1 auto' display='flex' fontWeight='semibold'>
             {mainContent}
           </chakra.span>
           <chakra.h4

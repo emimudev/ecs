@@ -58,7 +58,6 @@ function AuthenticatedHud() {
           <UserAvatar user={user} w='40px' h='40px' selectable />
         </MenuButton>
         <MenuList
-          // _light={{ bg: 'rgba(255, 255, 255, 0.85)' }}
           _dark={{ bg: 'rgb(26, 32, 44)' }}
           fontSize='sm'
           px={2}

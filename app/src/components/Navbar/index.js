@@ -39,7 +39,6 @@ const NavBarContainer = ({ children }) => {
       right={0}
       _light={{ bg: 'rgb(255, 255, 255)' }}
       _dark={{ bg: 'rgb(26, 32, 44)' }}
-      // backdropFilter='saturate(180%) blur(6px)'
       shadow='md'
       zIndex='sticky'
     >
