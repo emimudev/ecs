@@ -10,3 +10,13 @@ export function getCurrentTheme() {
     isLight: savedTheme === 'light'
   }
 }
+
+export const SelectProvinces = [
+  { label: 'San José', value: 'San José' },
+  { label: 'Heredia', value: 'Heredia' },
+  { label: 'Cartago', value: 'Cartago' },
+  { label: 'Alajuela', value: 'Alajuela' },
+  { label: 'Puntarenas', value: 'Puntarenas' },
+  { label: 'Limón', value: 'Limón' },
+  { label: 'Guanacaste', value: 'Guanacaste' }
+]

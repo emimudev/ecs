@@ -15,8 +15,15 @@ function SelectAdType({ value, title, description, icon, radioProps, setValue })
       <Flex
         direction='row'
         border='2px solid'
-        _light={{ borderColor: isChecked ? 'pink.200' : 'gray.300', bg: isChecked && 'pink.50' }}
-        _dark={{ borderColor: isChecked ? 'pink.600' : 'gray.500', bg: isChecked && 'pink.800' }}
+        _light={{
+          borderColor: isChecked ? 'pink.200' : 'gray.300',
+          bg: isChecked && 'pink.50'
+        }}
+        _dark={{
+          borderColor: isChecked ? 'pink.200' : 'gray.500',
+          bg: isChecked && 'rgba(251, 182, 206, 0.12)',
+          color: isChecked && 'pink.200'
+        }}
         py='2'
         px='4'
         borderRadius='2xl'
@@ -27,8 +34,14 @@ function SelectAdType({ value, title, description, icon, radioProps, setValue })
         {icon && (
           <Flex justify='center' align='center' flex='0 0 auto'>
             <Center
-              _light={{ color: isChecked ? 'pink.400' : 'blackAlpha.600', bg: isChecked ? 'pink.100' : 'gray.200' }}
-              _dark={{ color: isChecked ? 'pink.100' : 'whiteAlpha.500', bg: isChecked ? 'pink.600' : 'gray.800' }}
+              _light={{
+                color: isChecked ? 'pink.400' : 'blackAlpha.600',
+                bg: isChecked ? 'pink.100' : 'gray.200'
+              }}
+              _dark={{
+                color: isChecked ? 'pink.50' : 'whiteAlpha.500',
+                bg: isChecked ? 'pink.400' : 'gray.800'
+              }}
               borderRadius='full'
               p='2'
             >

@@ -18,8 +18,8 @@ function PageFooter() {
     <Box
       bg={useColorModeValue('white', 'rgba(26, 32, 44, 0.85)')}
       color={useColorModeValue('gray.700', 'gray.200')}
-      _light={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-300)' }}
-      _dark={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-700)' }}
+      _light={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-100)' }}
+      _dark={{ boxShadow: '0 0 0 1px var(--chakra-colors-gray-800)' }}
     >
       <Container
         as={Stack}

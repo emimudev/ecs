@@ -2,7 +2,8 @@ import {
   FormControl,
   FormErrorMessage,
   FormLabel,
-  Input
+  Input,
+  useColorModeValue
 } from '@chakra-ui/react'
 import PasswordInput from 'components/PasswordInput'
 
@@ -12,9 +13,13 @@ function FormikFormControl({
   placeholder,
   autoFocus = false,
   label,
-  inputProps,
-  variant = 'text'
+  inputProps = { variant: 'outline' },
+  variant = 'text',
+  ...props
 }) {
+  const bgColor = useColorModeValue('gray.100', 'gray.700')
+  const bgHoverColor = useColorModeValue('gray.200', 'gray.700')
+  const placeholderColor = useColorModeValue('gray.600', 'gray.400')
   if (!formik) {
     throw new Error('An instance of Formik is required.')
   }
@@ -26,7 +31,7 @@ function FormikFormControl({
   const labelColorDark = showLabelError ? 'red.200' : null
 
   return (
-    <FormControl isInvalid={isTouched && error} fontSize='sm'>
+    <FormControl isInvalid={isTouched && error} fontSize='sm' {...props}>
       <FormLabel
         _dark={{ color: labelColorDark }}
         _light={{ color: labelColorLight }}
@@ -41,6 +46,9 @@ function FormikFormControl({
           value={formik.values[name]}
           onChange={formik.handleChange}
           autoFocus={autoFocus}
+          bg={inputProps?.variant === 'filled' ? bgColor : 'transparent'}
+          _hover={{ bg: bgHoverColor }}
+          _placeholder={{ color: placeholderColor }}
           {...inputProps}
         />
       )}
@@ -51,6 +59,9 @@ function FormikFormControl({
           value={formik.values[name]}
           onChange={formik.handleChange}
           autoFocus={autoFocus}
+          bg={inputProps?.variant === 'filled' ? bgColor : 'transparent'}
+          _hover={{ bg: bgHoverColor }}
+          _placeholder={{ color: placeholderColor }}
           {...inputProps}
         />
       )}

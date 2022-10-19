@@ -29,6 +29,7 @@ function LoginPopup() {
           borderRadius={useBreakpointValue({ base: '0', sm: '3xl' })}
           px={useBreakpointValue({ base: '0', md: '6' })}
           py={useBreakpointValue({ base: '2', md: '6' })}
+          _dark={{ bg: 'gray.800' }}
         >
           <ModalCloseButton borderRadius='full' />
           <ModalBody>

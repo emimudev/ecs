@@ -6,7 +6,7 @@ const CategoryContainer = ({ children, index, to }) => (
     userSelect='none'
     as={Link}
     to={to}
-    boxShadow='md'
+    boxShadow='lg'
     maxW='700px'
     width='full'
     direction={{ base: 'column', md: 'row' }}
@@ -16,7 +16,7 @@ const CategoryContainer = ({ children, index, to }) => (
     gap={{ base: '3', md: '5' }}
     justifyContent='space-between'
     position='relative'
-    bg={useColorModeValue('white', 'gray.800')}
+    bg={useColorModeValue('rgb(255 255 255 / 90%)', 'rgb(26 32 44 / 90%)')}
     fontSize='sm'
     role='group'
     display='flex'
@@ -36,14 +36,16 @@ const CategoryContainer = ({ children, index, to }) => (
       backgroundImage: shadows[index % 4]
     }}
     transition='background 0.2s ease-out'
+    border='2px solid'
+    borderColor={useColorModeValue('gray.100', 'gray.800')}
     _light={{
       _hover: {
-        bg: 'gray.100'
+        borderColor: 'pink.300'
       }
     }}
     _dark={{
       _hover: {
-        bg: 'gray.700'
+        borderColor: 'pink.800'
       }
     }}
   >

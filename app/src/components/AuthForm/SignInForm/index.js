@@ -6,7 +6,7 @@ import {
   Text
 } from '@chakra-ui/react'
 import { AuthFormHeader } from 'components/AuthForm'
-import FormikFormControl from 'components/FormikFormControl'
+import FormikFormControl from 'components/AuthForm/FormikFormControl'
 import useSignInForm from './useSignInForm'
 
 function SignInForm() {
@@ -22,6 +22,7 @@ function SignInForm() {
           placeholder='Introduce tu correo electrónico'
           label='Correo electrónico'
           autoFocus
+          inputProps={inputProps}
         />
         <FormikFormControl
           formik={formik}
@@ -29,7 +30,7 @@ function SignInForm() {
           placeholder='Introduce tu contraseña'
           label='Contraseña'
           variant='password'
-          inputProps={{ autoComplete: 'current-password' }}
+          inputProps={{ autoComplete: 'current-password', ...inputProps }}
         />
         <Flex justify='space-between' flexWrap='wrap'>
           <Checkbox
@@ -69,6 +70,10 @@ function SignInForm() {
       </Stack>
     </form>
   )
+}
+
+const inputProps = {
+  variant: 'filled'
 }
 
 export default SignInForm

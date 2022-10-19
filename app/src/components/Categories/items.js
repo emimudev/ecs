@@ -12,7 +12,7 @@ const CategoryItems = [
   },
   {
     name: 'Motocicletas',
-    mainContent: 'Pásate a una moto eléctrica y obten un pilotaje estimulante kilómetro tras kilómetro con una aceleración silenciosa. Echa un vistazo a los diseños innovadores de las principales marcas.',
+    mainContent: 'Pásate a una moto eléctrica y obtén un pilotaje estimulante kilómetro tras kilómetro con una aceleración silenciosa. Echa un vistazo a los diseños innovadores de las principales marcas.',
     extraContent: 'Rieju • NIU • Silence • E-Sooner • MBA • Mobie • Horwin • Kavaki',
     icon: <Icon as={ElectricMotorcycle} h={8} w={8} />,
     to: '/motorcycles'

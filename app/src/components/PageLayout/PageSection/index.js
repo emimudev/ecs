@@ -7,7 +7,7 @@ const MainPadding = {
 
 function PageSection({ padding = MainPadding, children, title, description, icon, ...props }) {
   return (
-    <Flex flexDirection='column' gap={3} padding={padding} {...props}>
+    <Flex flexDirection='column' gap={2} padding={padding} {...props}>
       {(title || description || icon) && (
         <Flex flexDirection='column'>
           <Flex gap={2} alignItems='center'>
@@ -15,7 +15,7 @@ function PageSection({ padding = MainPadding, children, title, description, icon
               <Icon h='5' w='5' />
             )}
             {title && (
-              <Text as='h4' fontSize='xl' fontWeight='semibold' role='heading'>
+              <Text as='h4' fontSize='xl' fontWeight='bold' role='heading'>
                 {title}
               </Text>
             )}

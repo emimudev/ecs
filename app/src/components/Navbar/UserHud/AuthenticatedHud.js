@@ -43,7 +43,7 @@ function AuthenticatedHud() {
 
   return (
     <Flex direction='row' align='center' h='full' gap={2}>
-      <PublishAdButton />
+      <PublishAdButton variant='outline' />
       <Flex display={{ base: 'flex', sm: 'none', md: 'none' }}>
         <MobileNavTrigger />
       </Flex>

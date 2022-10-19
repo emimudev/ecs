@@ -13,8 +13,11 @@ function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }
           justifyContent='center'
           alignItems='center'
           flex='0 0 auto'
-          _light={{ bg: 'pink.300', color: 'pink.700' }}
-          _dark={{ bg: 'pink.400', color: 'pink.900' }}
+          _light={{ bg: 'pink.100', color: 'pink.400' }}
+          _dark={{
+            bg: 'pink.500',
+            color: 'pink.100'
+          }}
         >
           {icon}
         </Flex>
@@ -46,7 +49,7 @@ function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }
             _groupHover={{
               textDecoration: 'underline',
               _light: { color: 'pink.500' },
-              _dark: { color: 'pink.400' }
+              _dark: { color: 'pink.300' }
             }}
           >
             {name}

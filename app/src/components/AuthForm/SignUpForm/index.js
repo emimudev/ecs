@@ -1,6 +1,6 @@
 import { Button, Stack, Text } from '@chakra-ui/react'
-import FormikFormControl from 'components/FormikFormControl'
 import { AuthFormHeader } from '..'
+import FormikFormControl from 'components/AuthForm/FormikFormControl'
 import useSignUpForm from './useSignUpForm'
 
 function SignUpForm() {
@@ -15,19 +15,21 @@ function SignUpForm() {
           placeholder='Introduce tu nombre'
           label='Nombre'
           autoFocus
+          inputProps={inputProps}
         />
         <FormikFormControl
           formik={formik}
           name='lastname'
           placeholder='Introduce tus apellidos'
           label='Apellidos'
+          inputProps={inputProps}
         />
         <FormikFormControl
           formik={formik}
           name='email'
           placeholder='Introduce tu correo electrónico'
           label='Correo Electrónico'
-          inputProps={{ type: 'email' }}
+          inputProps={{ type: 'email', ...inputProps }}
         />
         <FormikFormControl
           formik={formik}
@@ -35,6 +37,7 @@ function SignUpForm() {
           placeholder='Introduce tu contraseña'
           label='Contraseña'
           variant='password'
+          inputProps={inputProps}
         />
         <FormikFormControl
           formik={formik}
@@ -42,6 +45,7 @@ function SignUpForm() {
           placeholder='Vuelve a introducir la contraseña'
           label='Confirmar contraseña'
           variant='password'
+          inputProps={inputProps}
         />
         <Stack spacing={1} pt='2'>
           <Button
@@ -69,6 +73,10 @@ function SignUpForm() {
       </Stack>
     </form>
   )
+}
+
+const inputProps = {
+  variant: 'filled'
 }
 
 export default SignUpForm
