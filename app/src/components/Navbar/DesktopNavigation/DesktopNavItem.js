@@ -69,8 +69,8 @@ function DesktopNavItem({ navItem }) {
               shadow='xl'
               bg={popoverContentBgColor}
               p={3}
-              rounded='lg'
-              minW='sm'
+              rounded='xl'
+              minW='md'
               border='none'
               borderTopRadius='none'
             >
