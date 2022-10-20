@@ -6,7 +6,6 @@ const Product = {
   year: '2022',
   brand: 'Toyota',
   price: 20000,
-  gearBox: 'Automático',
   discountPercentage: 10
 }
 
