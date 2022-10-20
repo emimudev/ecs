@@ -13,6 +13,7 @@ function PageLayout() {
         direction='column'
         flex='1 1 auto'
         minH='350px'
+        overflow='hidden'
       >
         <Outlet />
       </Flex>

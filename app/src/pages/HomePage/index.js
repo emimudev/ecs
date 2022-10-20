@@ -7,13 +7,13 @@ function HomePage() {
   return (
     <PageContainer>
       <PageBody>
-        <PageSection title='Publicaciones destacadas' mt='5'>
+        <PageSection title='Publicaciones destacadas' mt='5' hasSlick>
           <FeaturedPosts />
         </PageSection>
-        <PageSection title='Publicaciones recientes'>
+        <PageSection title='Publicaciones recientes' hasSlick>
           <RecentlyPosts />
         </PageSection>
-        <PageSection title='Últimas ofertas'>
+        <PageSection title='Últimas ofertas' hasSlick>
           <RecentlyPosts />
         </PageSection>
         <PageSection mb='80px'>

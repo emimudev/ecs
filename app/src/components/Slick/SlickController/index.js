@@ -1,4 +1,4 @@
-import { chakra, Icon } from '@chakra-ui/react'
+import { chakra, Icon, useBreakpointValue } from '@chakra-ui/react'
 
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
 
@@ -36,7 +36,12 @@ function SlickController({
       width='calc(3.5vw + 26px)'
       zIndex={1}
       opacity='0'
-      _hover={{ opacity: '1' }}
+      _hover={{
+        opacity: useBreakpointValue({
+          base: '0',
+          md: '1'
+        })
+      }}
       {...props}
     >
       <Icon as={isLeft ? AiOutlineLeft : AiOutlineRight} h='10' w='10' />

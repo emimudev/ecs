@@ -70,6 +70,7 @@ function Slick({ children, containerProps, ...props }) {
         className='slider-allow-overflow'
         nextArrow={NextArrow}
         prevArrow={PrevArrow}
+        swipeToSlide
         {..._settings}
       >
         {children}

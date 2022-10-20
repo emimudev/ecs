@@ -136,11 +136,12 @@ function ProductCard({
               flex='0 0 auto'
               fontWeight='semibold'
               _groupHover={{ textDecoration: 'underline' }}
+              gap={1}
             >
-              {name}
-            </Flex>
-            <Flex color='white' flex='0 0 auto' fontSize='xs'>
-              {year}
+              {name} -
+              <Flex color='white' flex='0 0 auto' fontSize='xs' alignItems='center'>
+                {year}
+              </Flex>
             </Flex>
             <Flex
               color='white'

@@ -5,9 +5,14 @@ const MainPadding = {
   lg: '0 calc(3.5vw + 24px)'
 }
 
-function PageSection({ padding = MainPadding, children, title, description, icon, ...props }) {
+function PageSection({ padding = MainPadding, children, hasSlick = false, title, description, icon, ...props }) {
   return (
-    <Flex flexDirection='column' gap={2} padding={padding} {...props}>
+    <Flex
+      flexDirection='column'
+      gap={2}
+      padding={MainPadding}
+      {...props}
+    >
       {(title || description || icon) && (
         <Flex flexDirection='column'>
           <Flex gap={2} alignItems='center'>
@@ -31,9 +36,11 @@ function PageSection({ padding = MainPadding, children, title, description, icon
           )}
         </Flex>
       )}
-      <div>
-        {children}
-      </div>
+      <Flex display='block' w='full' padding={{ base: hasSlick ? '0 15px' : '0', md: '0' }}>
+        <div>
+          {children}
+        </div>
+      </Flex>
     </Flex>
   )
 }

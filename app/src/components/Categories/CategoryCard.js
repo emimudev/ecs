@@ -4,7 +4,17 @@ import { CategoryContainer } from './CategoryContainer'
 function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }) {
   return (
     <CategoryContainer to={to} index={index}>
-      <Flex alignItems={{ base: 'center', md: 'flex-start' }} gap={3}>
+      <Flex
+        flexDirection={{
+          base: 'column',
+          sm: 'row'
+        }}
+        alignItems={{
+          base: 'center',
+          md: 'flex-start'
+        }}
+        gap={3}
+      >
         <Flex
           bg='pink.500'
           borderRadius='full'
@@ -25,7 +35,11 @@ function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }
           display={{ base: 'flex', md: 'none' }}
           fontWeight='bold'
           fontSize='xl'
-          noOfLines='1'
+          noOfLines='2'
+          textAlign={{
+            base: 'center',
+            sm: 'left'
+          }}
           _groupHover={{
             textDecoration: 'underline',
             _light: { color: 'pink.500' },
@@ -56,14 +70,31 @@ function CategoryCard({ name, mainContent, extraContent, icon, index, to = '#' }
           </chakra.h3>
         </Flex>
         <Flex flexDirection='column' gap={3} flex='1 1 auto'>
-          <chakra.span flex='1 1 auto' display='flex' fontWeight='semibold'>
+          <chakra.span
+            flex='1 1 auto'
+            display='flex'
+            fontWeight='semibold'
+            _dark={{
+              color: {
+                base: 'whiteAlpha.800'
+              }
+            }}
+          >
             {mainContent}
           </chakra.span>
           <chakra.h4
             _light={{ color: 'gray.600' }}
-            _dark={{ color: 'gray.500' }}
+            _dark={{
+              color: {
+                base: 'whiteAlpha.600'
+              }
+            }}
             fontWeight='bold'
             textTransform='uppercase'
+            fontSize={{
+              base: '12px',
+              sm: '14px'
+            }}
           >
             {extraContent}
           </chakra.h4>
