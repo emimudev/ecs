@@ -1,5 +1,6 @@
-import { Box, Center, Flex, Icon, chakra, Spacer } from '@chakra-ui/react'
-import React from 'react'
+import { Children, Fragment } from 'react'
+import { Box, Center, Flex, Icon, chakra, Spacer, Collapse, useDisclosure } from '@chakra-ui/react'
+import { FaChevronDown, FaChevronUp } from 'react-icons/fa'
 
 function Steps({ direction = 'vertical', children, ...props }) {
   if (direction !== 'vertical' && direction !== 'horizontal') {
@@ -14,17 +15,18 @@ function Steps({ direction = 'vertical', children, ...props }) {
       fontFamily='heading'
       {...props}
     >
-      {React.Children.map(children, (element, index) => (
-        <React.Fragment key={index}>
+      {Children.map(children, (element, index) => (
+        <Fragment key={index}>
           {element}
-          {(React.Children.count(children) > index + 1) && <Spacer />}
-        </React.Fragment>
+          {(Children.count(children) > index + 1) && <Spacer />}
+        </Fragment>
       ))}
     </Box>
   )
 }
 
-function StepItem({ label, icon, isCompleted, children, ...props }) {
+function StepItem({ label, isCollapsable = true, icon, isCompleted, children, ...props }) {
+  const { isOpen, onToggle } = useDisclosure({ defaultIsOpen: true })
   return (
     <Box
       as='li'
@@ -50,10 +52,17 @@ function StepItem({ label, icon, isCompleted, children, ...props }) {
         <chakra.span
           _light={{ color: 'gray.800' }}
           _dark={{ color: 'gray.100' }}
-          fontSize='md'
+          fontSize='lg'
           fontWeight='medium'
+          display='flex'
+          alignItems='center'
+          gap='3'
+          cursor={isCollapsable ? 'pointer' : 'default'}
+          onClickCapture={isCollapsable && onToggle}
+          userSelect='none'
         >
           {label}
+          {isCollapsable && <Icon as={isOpen ? FaChevronDown : FaChevronUp} />}
         </chakra.span>
       </Flex>
       <Box
@@ -68,7 +77,9 @@ function StepItem({ label, icon, isCompleted, children, ...props }) {
         transition='border-color 200ms'
         transitionDuration='200ms'
       >
-        {children}
+        <Collapse in={isOpen} animateOpacity style={{ padding: '10px 5px' }}>
+          {children}
+        </Collapse>
       </Box>
     </Box>
   )
@@ -77,31 +88,25 @@ function StepItem({ label, icon, isCompleted, children, ...props }) {
 function StepItemSurface({ children, ...props }) {
   return (
     <Box
-      py={{
-        base: '0',
-        sm: '3'
+      borderRadius='lg'
+      border='1px solid'
+      _dark={{
+        bg: 'gray.800',
+        borderColor: 'gray.700'
       }}
+      _light={{
+        bg: 'white',
+        borderColor: 'gray.200'
+      }}
+      shadow='md'
+      px={{
+        base: '4',
+        md: '10'
+      }}
+      py='6'
+      {...props}
     >
-      <Box
-        borderRadius='lg'
-        _dark={{
-          bg: 'gray.800',
-          borderColor: 'gray.700'
-        }}
-        _light={{
-          bg: 'white',
-          borderColor: 'gray.100'
-        }}
-        shadow='md'
-        px={{
-          base: '4',
-          md: '10'
-        }}
-        py='5'
-        {...props}
-      >
-        {children}
-      </Box>
+      {children}
     </Box>
   )
 }

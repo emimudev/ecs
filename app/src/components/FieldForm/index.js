@@ -53,9 +53,20 @@ function FieldForm({
     <ControlledInput name={name}>
       {({ field, form, meta }) => {
         return (
-          <FormControl display='flex' flexDirection='column' fontSize='sm' isInvalid={meta.touched && meta.error}>
+          <FormControl
+            display='flex'
+            flexDirection='column'
+            fontSize='sm'
+            isInvalid={meta.touched && meta.error}
+          >
             {label && (
-              <FormLabel fontSize='sm' mr='0' gap={2} display='flex' justifyContent='space-between'>
+              <FormLabel
+                fontSize='sm'
+                mr='0'
+                gap={2}
+                display='flex'
+                justifyContent='space-between'
+              >
                 {label}
                 {!isRequired && (
                   <chakra.span
@@ -94,7 +105,7 @@ function FieldForm({
                 />
               ) /* eslint-enable indent */}
             {helperText && (
-              <FormHelperText mt={1} fontSize='12px'>
+              <FormHelperText mt={1} fontSize='12px' textAlign='start'>
                 {helperText}
               </FormHelperText>
             )}
@@ -121,7 +132,7 @@ function FieldNumber({ field, form, meta, showControls = false, ...props }) {
 
 function FieldSwitch({ field, form, meta, ...props }) {
   return (
-    <Switch minW='120px' {...field} {...props} />
+    <Switch alignSelf='flex-start' {...field} {...props} />
   )
 }
 

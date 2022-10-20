@@ -1,12 +1,14 @@
 import { Form, Formik } from 'formik'
+import { Box, Button } from '@chakra-ui/react'
 import { FiUser, FiSettings } from 'react-icons/fi'
-import { AiOutlineCar } from 'react-icons/ai'
+import { AiFillMoneyCollect, AiOutlineCar } from 'react-icons/ai'
 import * as Yup from 'yup'
-import Steps, { StepItem, StepItemSurface } from 'components/Steps'
 import GeneralInformation from './GeneralInformation'
 import Equipment from './Equipment'
 import SellerInformation from './SellerInformation'
-import { Divider, Box, Button } from '@chakra-ui/react'
+import Pricing from './Pricing'
+import Steps, { StepItem, StepItemSurface } from 'components/Steps'
+import Surface from 'components/Surface'
 
 function PublishCarForm() {
   return (
@@ -18,7 +20,7 @@ function PublishCarForm() {
       }}
     >
       <Form autoComplete='off'>
-        <Steps>
+        <Steps gap={{ base: '2', sm: '0' }}>
           <StepItem icon={FiUser} label='Información del vendedor'>
             <StepItemSurface>
               <SellerInformation />
@@ -34,9 +36,12 @@ function PublishCarForm() {
               <Equipment />
             </StepItemSurface>
           </StepItem>
+          <StepItem icon={AiFillMoneyCollect} label='Precios'>
+            <Pricing />
+          </StepItem>
         </Steps>
-        <Box pl='20px'>
-          <Button type='submit' colorScheme='purple'>
+        <Box as={Surface} mt='10px'>
+          <Button type='submit' colorScheme='pink'>
             Publicar anuncio
           </Button>
         </Box>
@@ -67,6 +72,7 @@ const InitialValues = {
   doorsNumber: '',
   province: '',
   extraComment: '',
+  adPricing: '',
   equipment: []
 }
 
