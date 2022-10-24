@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 import { PageBody, PageContainer, PageSection } from 'components/PageLayout'
 import DazedFace from 'components/Illustrations/DazedFace'
 import FeaturedPosts from 'components/FeaturedPosts'
+import ScrollToTopOnMount from 'components/ScrollToTopOnMount'
 
 function NotFoundPage() {
   return (
     <PageContainer>
+      <ScrollToTopOnMount />
       <PageBody py='5'>
         <Container maxW='3xl'>
           <Flex flexDirection='column' gap='8'>

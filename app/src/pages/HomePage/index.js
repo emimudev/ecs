@@ -2,10 +2,12 @@ import FeaturedPosts from 'components/FeaturedPosts'
 import { PageBody, PageContainer, PageSection } from 'components/PageLayout'
 import RecentlyPosts from 'components/RecentlyPosts'
 import Categories from 'components/Categories'
+import ScrollToTopOnMount from 'components/ScrollToTopOnMount'
 
 function HomePage() {
   return (
     <PageContainer>
+      <ScrollToTopOnMount />
       <PageBody>
         <PageSection title='Publicaciones destacadas' mt='5' hasSlick>
           <FeaturedPosts />
