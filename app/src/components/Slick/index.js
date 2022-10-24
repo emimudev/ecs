@@ -40,12 +40,24 @@ const slickSettings = {
   ]
 }
 
-function Slick({ children, containerProps, ...props }) {
+/**
+ * @param {import('react-slick').Settings|{children:React.ReactNode, showOverflow:Boolean, containerProps: import('@chakra-ui/react').ChakraComponent<"div">}} params
+ */
+function Slick({
+  children,
+  containerProps,
+  solidArrows = false,
+  showOverflow = true,
+  hideArrows = true,
+  ...props
+}) {
   const sliderRef = useRef({})
 
   const NextArrow = (
     <SlickController
       sliderRef={sliderRef}
+      solidArrows={solidArrows}
+      hideArrows={hideArrows}
       aria-label='Selecciona esta opción para ver más publicaciones destacadas'
     />
   )
@@ -53,6 +65,8 @@ function Slick({ children, containerProps, ...props }) {
   const PrevArrow = (
     <SlickController
       sliderRef={sliderRef}
+      solidArrows={solidArrows}
+      hideArrows={hideArrows}
       aria-label='Selecciona esta opción para ver más publicaciones destacadas'
       isLeft
     />
@@ -67,7 +81,7 @@ function Slick({ children, containerProps, ...props }) {
     <chakra.div {...containerProps}>
       <Slider
         ref={sliderRef}
-        className='slider-allow-overflow'
+        className={showOverflow && 'slider-allow-overflow'}
         nextArrow={NextArrow}
         prevArrow={PrevArrow}
         swipeToSlide

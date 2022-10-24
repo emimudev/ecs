@@ -13,7 +13,7 @@ function PageLayout() {
         direction='column'
         flex='1 1 auto'
         minH='350px'
-        overflow='hidden'
+        style={{ contain: 'paint' }}
       >
         <Outlet />
       </Flex>

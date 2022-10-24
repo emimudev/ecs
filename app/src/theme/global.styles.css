@@ -21,6 +21,11 @@ body {
   padding: 10px;
 }
 
+.slick-slider .slick-track {
+  margin-left: 0;
+  margin-right: 0;
+}
+
 .slick-slide:not(.slick-active) .slick-item {
   filter: brightness(0.7);
   transition: filter 0.5s ease-in;

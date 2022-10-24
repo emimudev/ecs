@@ -7,6 +7,8 @@ function SlickController({
   slideCount,
   sliderRef,
   isLeft = false,
+  solidArrows = false,
+  hideArrows = true,
   ...props
 }) {
   const handleClick = () => {
@@ -26,25 +28,39 @@ function SlickController({
       position='absolute'
       color='white'
       tabIndex='0'
-      height='100%'
+      height={!solidArrows ? '100%' : '40px'}
       justifyContent='center'
       alignItems='center'
-      top='0'
+      top={solidArrows ? 'calc(50% - 20px)' : '0'}
+      borderRadius={solidArrows && 'full'}
+      alignSelf='center'
       right={isLeft ? 'auto' : '0'}
-      transform={`translateX(${isLeft ? '-100%' : '100%'})`}
+      transform={!solidArrows && `translateX(${isLeft ? '-100%' : '100%'})`}
       transition='opacity 0.2s ease 0s'
-      width='calc(3.5vw + 26px)'
+      width={!solidArrows ? 'calc(3.5vw + 26px)' : '40px'}
       zIndex={1}
-      opacity='0'
+      opacity={hideArrows ? '0' : '.9'}
       _hover={{
         opacity: useBreakpointValue({
-          base: '0',
+          base: solidArrows ? '1' : '0',
           md: '1'
         })
       }}
+      _dark={{
+        bg: solidArrows && 'gray.900'
+      }}
+      _light={{
+        bg: solidArrows && 'gray.300',
+        color: 'gray.600'
+      }}
+      shadow='md'
       {...props}
     >
-      <Icon as={isLeft ? AiOutlineLeft : AiOutlineRight} h='10' w='10' />
+      <Icon
+        as={isLeft ? AiOutlineLeft : AiOutlineRight}
+        h={solidArrows ? '5' : '10'}
+        w={solidArrows ? '5' : '10'}
+      />
     </chakra.button>
   )
 }

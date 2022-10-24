@@ -33,6 +33,7 @@ function PricingCard({
         borderColor: isSelected ? 'pink.500' : 'gray.50'
       }}
       w='full'
+      transition='background .3s ease-out, border-color 0.3s ease-out'
     >
       {isPopular && (
         <Box
@@ -50,7 +51,7 @@ function PricingCard({
           Popular
         </Box>
       )}
-      <VStack h='full'>
+      <VStack h='full' w='full'>
         <Flex
           justify='center'
           _light={{ color: 'pink.500' }}
@@ -67,10 +68,10 @@ function PricingCard({
         >
           {amount}
         </Flex>
-        <Flex justify='center' _dark={{ color: 'whiteAlpha.700' }}>
+        <Flex textAlign='center' justify='center' _dark={{ color: 'whiteAlpha.700' }}>
           {description}
         </Flex>
-        <VStack textAlign='left' w='full' maxW='300px' pt='4'>
+        <VStack textAlign='left' w='full' maxW='95%' pt='4'>
           {details.map((detail, index) => (
             <Fragment key={index}>
               <Divider />
@@ -103,6 +104,7 @@ function PricingCard({
             w='full'
             leftIcon={isSelected && <Icon as={FaCheck} />}
             onClickCapture={handleClick}
+            filter={isSelected && 'opacity(0.4)'}
           >
             {isSelected ? 'Seleccionado' : 'Seleccionar plan'}
           </Button>

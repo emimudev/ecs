@@ -37,6 +37,7 @@ function Equipment() {
           isInline
           size='lg'
           onChange={handleChange}
+          colorScheme='pink'
         />
       ))}
     </Grid>

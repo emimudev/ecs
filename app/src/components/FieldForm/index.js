@@ -48,7 +48,7 @@ function FieldForm({
     borderRadius: 'md',
     ...props
   }
-  const _placeholder = placeholder && `${placeholder}...`
+  const _placeholder = placeholder
   return (
     <ControlledInput name={name}>
       {({ field, form, meta }) => {

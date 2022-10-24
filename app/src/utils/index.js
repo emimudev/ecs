@@ -20,3 +20,26 @@ export const SelectProvinces = [
   { label: 'Limón', value: 'Limón' },
   { label: 'Guanacaste', value: 'Guanacaste' }
 ]
+
+export function formatBytes(bytes, decimals = 2) {
+  if (!+bytes) return '0 Bytes'
+  const k = 1024
+  const dm = decimals < 0 ? 0 : decimals
+  const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+  const i = Math.floor(Math.log(bytes) / Math.log(k))
+  return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`
+}
+
+export function previewFile({ file }) {
+  const preview = document.querySelector('img')
+  const reader = new FileReader()
+
+  reader.addEventListener('load', () => {
+    // convert image file to base64 string
+    preview.src = reader.result
+  }, false)
+
+  if (file) {
+    reader.readAsDataURL(file)
+  }
+}

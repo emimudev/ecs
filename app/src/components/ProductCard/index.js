@@ -58,7 +58,8 @@ function ProductCard({
   discountPercentage = 0,
   price,
   currencyType = 'US',
-  brand
+  brand,
+  srcImg
 }) {
   const { ariaHiddenRef, isHidden } = useAriaHidden({ selector: 'div.slick-slide' })
   const numberFormat = new Intl.NumberFormat(
@@ -107,7 +108,7 @@ function ProductCard({
             position='absolute'
             transition='opacity 500ms ease-in-out 0s'
             objectPosition='center'
-            src={images[randomNumber(0, images.length - 1)]}
+            src={srcImg || images[randomNumber(0, images.length - 1)]}
             alt='add name here'
             onError={() => console.log('err')}
             loading='lazy'

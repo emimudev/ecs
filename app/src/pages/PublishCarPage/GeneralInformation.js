@@ -77,16 +77,19 @@ function GeneralInformation() {
         name='isNP'
         label='¿El precio es negociable?'
         type='switch'
+        colorScheme='pink'
       />
       <ProductField
         name='hasAlreadyPaidTaxes'
         label='¿Ya pagó impuestos?'
         type='switch'
+        colorScheme='pink'
       />
       <ProductField
         name='receiveVehicle'
         label='¿Se recibe vehículo?'
         type='switch'
+        colorScheme='pink'
       />
       <Divider my='0' />
       <ProductField
