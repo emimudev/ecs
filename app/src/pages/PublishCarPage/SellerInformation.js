@@ -32,6 +32,7 @@ function SellerInformation() {
         name='sellerSecondaryPhone'
         label='Teléfono secundario'
         placeholder='Escriba el número de teléfono'
+        isRequired={false}
         type='number'
       />
       <Divider my='0' />

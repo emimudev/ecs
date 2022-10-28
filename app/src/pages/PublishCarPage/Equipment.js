@@ -38,6 +38,10 @@ function Equipment() {
           size='lg'
           onChange={handleChange}
           colorScheme='pink'
+          validateIsChecked={() => {
+            // console.log({ name: value, equipment: formik.values.equipment })
+            return formik.values.equipment.find(item => item === value) !== undefined
+          }}
         />
       ))}
     </Grid>

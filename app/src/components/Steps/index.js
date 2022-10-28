@@ -77,7 +77,7 @@ function StepItem({ label, isCollapsable = true, icon, isCompleted, children, ..
         transition='border-color 200ms'
         transitionDuration='200ms'
       >
-        <Collapse in={isOpen} animateOpacity style={{ padding: '10px 5px' }}>
+        <Collapse in={isOpen} animateOpacity style={{ padding: '10px 5px', overflow: null }}>
           {children}
         </Collapse>
       </Box>

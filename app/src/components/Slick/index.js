@@ -1,5 +1,5 @@
 import { chakra } from '@chakra-ui/react'
-import { useRef } from 'react'
+import { forwardRef, useImperativeHandle, memo, useRef } from 'react'
 import Slider from 'react-slick'
 import SlickController from './SlickController'
 
@@ -43,14 +43,14 @@ const slickSettings = {
 /**
  * @param {import('react-slick').Settings|{children:React.ReactNode, showOverflow:Boolean, containerProps: import('@chakra-ui/react').ChakraComponent<"div">}} params
  */
-function Slick({
+const Slick = forwardRef(({
   children,
   containerProps,
   solidArrows = false,
   showOverflow = true,
   hideArrows = true,
   ...props
-}) {
+}, ref) => {
   const sliderRef = useRef({})
 
   const NextArrow = (
@@ -72,6 +72,10 @@ function Slick({
     />
   )
 
+  useImperativeHandle(ref, () => ({
+    onLoad: () => sliderRef.current.slickGoTo(0)
+  }))
+
   const _settings = {
     ...slickSettings,
     ...props
@@ -84,15 +88,14 @@ function Slick({
         className={showOverflow && 'slider-allow-overflow'}
         nextArrow={NextArrow}
         prevArrow={PrevArrow}
-        swipeToSlide
         {..._settings}
       >
         {children}
       </Slider>
     </chakra.div>
   )
-}
+})
 
-export default Slick
+export default memo(Slick)
 export { default as SlickController } from './SlickController'
 export { default as SlickItem } from './SlickItem'

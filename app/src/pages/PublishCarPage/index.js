@@ -4,29 +4,13 @@ import useHiddenPage from 'hooks/useHiddenPage'
 import ScrollToTopOnMount from 'components/ScrollToTopOnMount'
 import PublishCarHeader from './PublishCarHeader'
 import PublishCarForm from './PublishCarForm'
-import { createContext, useContext } from 'react'
-
-const PublishContext = createContext()
-
-const usePublishContext = () => useContext(PublishContext)
-
-function PublishContextProvider({ children }) {
-  const handleSubmit = (values) => {
-    console.log({ values })
-  }
-
-  return (
-    <PublishContext.Provider value={{ handleSubmit }}>
-      {children}
-    </PublishContext.Provider>
-  )
-}
+import PublishCarContextProvider from 'context/PublishCarContext'
 
 function PublishCarPage() {
   const { show } = useHiddenPage()
   if (!show) return null
   return (
-    <PublishContextProvider>
+    <PublishCarContextProvider>
       <PageContainer>
         <ScrollToTopOnMount />
         <PublishCarTopAd />
@@ -39,7 +23,7 @@ function PublishCarPage() {
           </PageSection>
         </PageBody>
       </PageContainer>
-    </PublishContextProvider>
+    </PublishCarContextProvider>
   )
 }
 

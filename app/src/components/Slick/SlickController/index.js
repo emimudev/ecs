@@ -21,6 +21,7 @@ function SlickController({
 
   return (
     <chakra.button
+      type='button'
       onClick={handleClick}
       background='transparent'
       cursor='pointer'

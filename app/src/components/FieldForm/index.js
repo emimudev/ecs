@@ -109,6 +109,11 @@ function FieldForm({
                 {helperText}
               </FormHelperText>
             )}
+            {meta.touched && meta.error && (
+              <FormHelperText mt={1} _dark={{ color: 'red.300' }} _light={{ color: 'red.800' }} fontSize='12px' textAlign='start'>
+                {meta.error}
+              </FormHelperText>
+            )}
           </FormControl>
         )
       }}
@@ -116,10 +121,10 @@ function FieldForm({
   )
 }
 
-function FieldNumber({ field, form, meta, showControls = false, ...props }) {
+function FieldNumber({ field, form, meta, showControls = false, placeholder, ...props }) {
   return (
-    <NumberInput {...props}>
-      <NumberInputField {...field} _dark={darkStyles} _light={lightStyles} {...props} />
+    <NumberInput {...props} value={field.value}>
+      <NumberInputField {...field} _dark={darkStyles} _light={lightStyles} placeholder={placeholder} />
       {showControls && (
         <NumberInputStepper>
           <NumberIncrementStepper />
@@ -132,7 +137,7 @@ function FieldNumber({ field, form, meta, showControls = false, ...props }) {
 
 function FieldSwitch({ field, form, meta, ...props }) {
   return (
-    <Switch alignSelf='flex-start' {...field} {...props} />
+    <Switch alignSelf='flex-start' {...field} {...props} isChecked={Boolean(form.values[field?.name])} />
   )
 }
 
@@ -262,9 +267,9 @@ function FieldTextarea({ field, form, meta, showCount = true, max = 200, ...prop
   )
 }
 
-function FieldCheckbox({ field, form, meta, option, ...props }) {
+function FieldCheckbox({ field, form, meta, option, validateIsChecked, ...props }) {
   return (
-    <Checkbox {...field} {...props}>
+    <Checkbox {...field} {...props} isChecked={validateIsChecked?.()}>
       {option}
     </Checkbox>
   )

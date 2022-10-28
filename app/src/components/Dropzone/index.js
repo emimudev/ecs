@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Alert, AlertIcon, Flex, Skeleton } from '@chakra-ui/react'
 import { useDropzone } from 'react-dropzone'
 import { formatBytes } from 'utils'
@@ -7,19 +7,27 @@ import Slick, { SlickItem } from 'components/Slick'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 /**
- * @param {import('react-dropzone').DropzoneOptions|{name: string, children: React.ReactNode}} params
+ * @param {import('react-dropzone').DropzoneOptions|{name: string, children: React.ReactNode, isError: Boolean}} params
  */
-function Dropzone({ name, children, ...props }) {
+function Dropzone({ name, children, onDropAccepted, isError = false, ...props }) {
+  const slickRef = useRef()
   const {
     acceptedFiles,
     fileRejections,
     getRootProps,
     getInputProps,
     isDragActive
-  } = useDropzone({ ...props })
+  } = useDropzone({
+    ...props,
+    onDropAccepted: (files, event) => {
+      onDropAccepted?.(files, event)
+      slickRef.current?.onLoad()
+    }
+  })
   const { disabled = false, maxSize, maxFiles } = props
+
   return (
-    <Flex flexDirection='column' gap='5'>
+    <Flex flexDirection='column' gap='3'>
       <Flex
         gap='2'
         flexDirection='column'
@@ -31,11 +39,11 @@ function Dropzone({ name, children, ...props }) {
         px='4'
         _dark={{
           bg: isDragActive ? 'blue.800' : 'whiteAlpha.50',
-          borderColor: isDragActive ? 'blue.300' : 'gray.500'
+          borderColor: isError ? 'red.400' : isDragActive ? 'blue.300' : 'gray.500'
         }}
         _light={{
           bg: isDragActive ? 'blue.50' : 'blackAlpha.100',
-          borderColor: isDragActive ? 'blue.600' : 'gray.500'
+          borderColor: isError ? 'red.400' : isDragActive ? 'blue.600' : 'gray.500'
         }}
         userSelect='none'
         opacity={disabled && '.4'}
@@ -81,17 +89,16 @@ function Dropzone({ name, children, ...props }) {
       <div style={{ contain: 'paint' }}>
         <div>
           <Slick
-            initialSlide={0}
+            ref={slickRef}
             solidArrows
             hideArrows={false}
             slidesToShow={5}
             slidesToScroll={1}
             speed={200}
-            infinite
             responsive={responsiveSettings}
           >
             {acceptedFiles.map((file) => (
-              <SlickItem key={file.lastModified}>
+              <SlickItem key={file.name}>
                 <ImagePreview file={file} />
               </SlickItem>
             ))}
@@ -133,7 +140,6 @@ function ImagePreview({ file }) {
       overflow='hidden'
     >
       <LazyLoadImage
-        loading='lazy'
         placeholder={<Skeleton w='full' h='full' />}
         src={src}
         style={{
@@ -149,23 +155,30 @@ function ImagePreview({ file }) {
 
 const responsiveSettings = [
   {
-    breakpoint: 1500,
+    breakpoint: 1653,
     settings: {
       slidesToShow: 4,
-      slidesToScroll: 1
+      slidesToScroll: 4
     }
   },
   {
-    breakpoint: 1144,
+    breakpoint: 1536,
     settings: {
       slidesToShow: 3,
       slidesToScroll: 1
     }
   },
   {
-    breakpoint: 480,
+    breakpoint: 768,
     settings: {
       slidesToShow: 2,
+      slidesToScroll: 1
+    }
+  },
+  {
+    breakpoint: 480,
+    settings: {
+      slidesToShow: 1,
       slidesToScroll: 1
     }
   }
