@@ -110,15 +110,6 @@ function PublishButton() {
       equipment: ['RTV al día', 'Bolsas de aire', 'Aros de lujo', 'Llave inteligente', 'Botón de arranque', 'Computadora de viaje', 'Bluetooth']
     })
   }
-  const { mutation } = usePublishContext()
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
-  useEffect(() => {
-    if (mutation.isLoading && !isOpen) {
-      onOpen()
-    }
-  }, [isOpen, mutation.isLoading, onOpen])
-
   return (
     <Flex
       position='sticky'
@@ -148,23 +139,6 @@ function PublishButton() {
           </Button>
         )}
       </Box>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Modal Title</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            asdasdasd asd sad sadsa das dasd
-          </ModalBody>
-
-          {/* <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button variant='ghost'>Secondary Action</Button>
-          </ModalFooter> */}
-        </ModalContent>
-      </Modal>
     </Flex>
   )
 }

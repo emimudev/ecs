@@ -23,6 +23,7 @@ export const InitialValues = {
   province: '',
   extraComment: '',
   adPricing: 0,
+  discountPercentage: 0,
   equipment: [],
   files: []
 }
@@ -93,6 +94,10 @@ const publishCarSchema = Yup.object({
     .min(1, 'Debe seleccionar un plan antes de publicar el anuncio')
     .max(3)
     .required(defaultRequiredMessage),
+  discountPercentage: Yup
+    .number()
+    .min(0, 'El descuento mínimo es 0')
+    .max(100, 'El descuento máximo es 100'),
   files: Yup
     .array()
     .min(1, 'Debe publicar al menos una foto')

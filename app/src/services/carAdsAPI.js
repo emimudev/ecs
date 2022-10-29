@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { API_URL } from './services.config'
 
-const ENTRY_POINT = 'ad/cars'
+const ENTRY_POINT = 'posts/cars'
 
 function create(carAd) {
   return axios

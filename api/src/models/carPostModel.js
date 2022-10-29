@@ -3,7 +3,7 @@ const toJsonTransform = require('../utils/toJsonTransform')
 const { CarSchema } = require('./carModel')
 const { SellerSchema } = require('./sellerModel')
 
-const CarAdSchema = new Schema({
+const CarPostSchema = new Schema({
   seller: SellerSchema,
   car: CarSchema,
   province: String,
@@ -16,11 +16,11 @@ const CarAdSchema = new Schema({
   files: [Object]
 })
 
-toJsonTransform(CarAdSchema)
+toJsonTransform(CarPostSchema)
 
-const CarAdModel = model('CardAd', CarAdSchema)
+const CarPostModel = model('CarPost', CarPostSchema)
 
 module.exports = {
-  CarAdSchema,
-  CarAdModel
+  CarPostSchema,
+  CarPostModel
 }
