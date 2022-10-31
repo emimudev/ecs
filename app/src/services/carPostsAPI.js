@@ -3,14 +3,14 @@ import { API_URL } from './services.config'
 
 const ENTRY_POINT = 'posts/cars'
 
-function create(carAd) {
+function create(carPost) {
   return axios
-    .post(`${API_URL}/${ENTRY_POINT}`, carAd)
+    .post(`${API_URL}/${ENTRY_POINT}`, { data: carPost })
     .then(res => res.data)
 }
 
-const carAdsAPI = {
+const carPostsAPI = {
   create
 }
 
-export default carAdsAPI
+export default carPostsAPI

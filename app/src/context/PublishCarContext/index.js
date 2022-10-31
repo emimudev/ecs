@@ -11,12 +11,14 @@ import {
   Heading,
   Icon,
   Flex,
-  useColorModeValue
+  useColorModeValue,
+  Button
 } from '@chakra-ui/react'
 import { useMutation } from '@tanstack/react-query'
 import { BsCheckCircle, BsXCircle } from 'react-icons/bs'
-import carAdsAPI from 'services/carAdsAPI'
+import carPostsAPI from '../../services/carPostsAPI'
 import parseValues from './parseValues'
+import { Link } from 'react-router-dom'
 
 const PublishCarContext = createContext()
 
@@ -24,8 +26,7 @@ function PublishCarContextProvider({ children }) {
   const bg = useColorModeValue('white', 'gray.700')
   const [isPublishing, setIsPublishing] = useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure({ defaultIsOpen: false })
-  // const filesMutation = useMutation(carAdsAPI, )
-  const mutation = useMutation(carAdsAPI.create, {
+  const carPostMutation = useMutation(carPostsAPI.create, {
     onMutate: () => {
       setIsPublishing(true)
       onOpen()
@@ -34,24 +35,23 @@ function PublishCarContextProvider({ children }) {
       setIsPublishing(false)
     }
   })
-  const handleSubmit = (values) => {
-    const { files, ...adValues } = values
-    const adInfo = parseValues({ values: adValues })
-    mutation.mutate(adInfo)
+  const handleSubmit = async (values) => {
+    const adInfo = await parseValues(values)
+    carPostMutation.mutate(adInfo)
   }
   return (
-    <PublishCarContext.Provider value={{ handleSubmit }}>
+    <PublishCarContext.Provider value={{ handleSubmit, mutation: carPostMutation }}>
       {children}
       <Modal
         isOpen={isOpen}
         onClose={onClose}
         isCentered
-        closeOnOverlayClick={mutation.isSuccess || mutation.isError}
+        closeOnOverlayClick={!isPublishing && !carPostMutation.isSuccess}
       >
         <ModalOverlay />
         <ModalContent
           maxW='container.sm'
-          bg={mutation.isLoading ? 'transparent' : bg}
+          bg={isPublishing ? 'transparent' : bg}
           shadow={isPublishing && 'none'}
           borderRadius='2xl'
         >
@@ -71,10 +71,10 @@ function PublishCarContextProvider({ children }) {
                 </Text>
               </Flex>
             )}
-            {(!isPublishing && mutation.isSuccess) && (
+            {(!isPublishing && carPostMutation.isSuccess) && (
               <SuccessPublishing />
             )}
-            {(!isPublishing && mutation.isError) && (
+            {(!isPublishing && carPostMutation.isError) && (
               <ErrorPublishing />
             )}
           </ModalBody>
@@ -85,6 +85,8 @@ function PublishCarContextProvider({ children }) {
 }
 
 const SuccessPublishing = () => {
+  const { mutation: { data } } = usePublishContext()
+  console.log({ data })
   return (
     <Box textAlign='center' py={7} px={6}>
       <Icon
@@ -105,6 +107,9 @@ const SuccessPublishing = () => {
         El anuncio ha sido publicado, que tenga éxitos en su venta.
         Si lo desea puede editar esta publicación.
       </Text>
+      <Button as={Link} to={`/post/${data.id}`} mt='3' colorScheme='green'>
+        Ver anuncio
+      </Button>
     </Box>
   )
 }

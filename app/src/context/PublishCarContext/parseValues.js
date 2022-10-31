@@ -1,6 +1,8 @@
 import { PricingInfo } from 'pages/PublishCarPage/Pricing'
+import { toBase64 } from 'utils'
 
-function parseValues({ values }) {
+async function parseValues({ files, ...values }) {
+  const filesTransformed = await getFiles(files)
   return ({
     seller: {
       name: values.sellerName,
@@ -31,8 +33,13 @@ function parseValues({ values }) {
     discountPercentage: values.discountPercentage,
     duration: PricingInfo[values.adPricing].adMaxDuration,
     maxFiles: PricingInfo[values.adPricing].adMaxFiles,
-    files: []
+    files: filesTransformed
   })
+}
+
+const getFiles = async (files) => {
+  const promises = files.map(file => toBase64(file))
+  return Promise.all(promises)
 }
 
 export default parseValues

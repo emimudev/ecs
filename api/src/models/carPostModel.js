@@ -4,6 +4,7 @@ const { CarSchema } = require('./carModel')
 const { SellerSchema } = require('./sellerModel')
 
 const CarPostSchema = new Schema({
+  publishedBy: Schema.Types.ObjectId,
   seller: SellerSchema,
   car: CarSchema,
   province: String,

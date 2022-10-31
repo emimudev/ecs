@@ -1,9 +1,9 @@
 const authRouter = require('./authRouter')
 const usersRouter = require('./usersRouter')
-const carAdsRouter = require('./carAdRouter')
+const carPostsRouter = require('./carPostsRouter')
 
 module.exports = {
   authRouter,
   usersRouter,
-  carAdsRouter
+  carPostsRouter
 }

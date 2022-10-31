@@ -43,3 +43,17 @@ export function previewFile({ file }) {
     reader.readAsDataURL(file)
   }
 }
+
+export function toBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader()
+    reader.readAsDataURL(file)
+    reader.onload = () => resolve(reader.result)
+    reader.onerror = error => reject(error)
+  })
+}
+
+export const getFormData = obj => Object.keys(obj).reduce((fd, key) => {
+  fd.append(key, obj[key])
+  return fd
+}, new FormData())
