@@ -2,10 +2,33 @@ const { userExtractor } = require('../middleware')
 const { CarPostService } = require('../services/CarPostService')
 const { cloudinary, getUploadFolder } = require('../services/Cloudinary')
 const carPostsRouter = require('express').Router()
+const PageSize = 55
 
 carPostsRouter.get('/', userExtractor, async (request, response) => {
   const carAd = request.body
   return CarPostService.create(carAd)
+})
+carPostsRouter.get('/all', async (request, response) => {
+  const page = parseInt(request.query.page || '0')
+  const total = await CarPostService.getTotal()
+  const posts = await CarPostService.getPage(PageSize, page)
+  response.send({
+    totalPages: Math.ceil(total / PageSize),
+    posts
+  }
+  )
+})
+
+carPostsRouter.get('/search', async (request, response) => {
+  const page = parseInt(request.query.page || '0')
+  const { model, yearValues, priceValues, brandValues, province, carsStyles } = request.query
+  const total = await CarPostService.getSearchTotal(model, yearValues, priceValues, brandValues, province, carsStyles)
+  const posts = await CarPostService.getSearch(model, yearValues, priceValues, brandValues, province, carsStyles, PageSize, page)
+  response.send({
+    totalPages: Math.ceil(total / PageSize),
+    posts
+  }
+  )
 })
 
 carPostsRouter.get('/:id', async (request, response, next) => {

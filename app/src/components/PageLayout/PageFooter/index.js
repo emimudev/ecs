@@ -40,7 +40,7 @@ function PageFooter() {
           fontSize='sm'
         >
           <Link as={RouterLink} to='/'>Inicio</Link>
-          <Link as={RouterLink} to='#'>Sobre nosotros</Link>
+          <Link as={RouterLink} to='/information'>Sobre nosotros</Link>
           <Link as={RouterLink} to='#'>Legal</Link>
           <Link as={RouterLink} to='#'>Contacto</Link>
         </Stack>

@@ -20,6 +20,14 @@ export const SelectProvinces = [
   { label: 'Limón', value: 'Limón' },
   { label: 'Guanacaste', value: 'Guanacaste' }
 ]
+export const CarsStyles = [
+  { label: 'Sedán', value: 'Sedán' },
+  { label: 'Station Wagon', value: 'Station Wagon' },
+  { label: 'Hatchback', value: 'Hatchback' },
+  { label: 'Pick Up 4x2', value: 'Pick Up 4x2' },
+  { label: 'Pick Up 4x4', value: 'Pick Up 4x4' },
+  { label: 'Microbus', value: 'Microbus' }
+]
 
 export function formatBytes(bytes, decimals = 2) {
   if (!+bytes) return '0 Bytes'
