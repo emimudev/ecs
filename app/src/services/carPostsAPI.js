@@ -3,6 +3,12 @@ import { API_URL } from './services.config'
 
 const ENTRY_POINT = 'posts/cars'
 
+function find(carPostId) {
+  return axios
+    .get(`${API_URL}/${ENTRY_POINT}/${carPostId}`)
+    .then(res => res.data)
+}
+
 function create(carPost) {
   return axios
     .post(`${API_URL}/${ENTRY_POINT}`, { data: carPost })
@@ -10,7 +16,8 @@ function create(carPost) {
 }
 
 const carPostsAPI = {
-  create
+  create,
+  find
 }
 
 export default carPostsAPI

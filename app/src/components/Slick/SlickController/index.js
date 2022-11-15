@@ -25,7 +25,7 @@ function SlickController({
       onClick={handleClick}
       background='transparent'
       cursor='pointer'
-      display='block'
+      style={{ display: solidArrows ? 'flex' : 'block' }}
       position='absolute'
       color='white'
       tabIndex='0'
@@ -48,13 +48,12 @@ function SlickController({
         })
       }}
       _dark={{
-        bg: solidArrows && 'gray.900'
+        bg: solidArrows && 'pink.300'
       }}
       _light={{
-        bg: solidArrows && 'gray.300',
-        color: 'gray.600'
+        bg: solidArrows && 'pink.500',
+        color: 'white'
       }}
-      shadow='md'
       {...props}
     >
       <Icon

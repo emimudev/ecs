@@ -10,7 +10,7 @@ function PageSection({ padding = MainPadding, children, hasSlick = false, title,
     <Flex
       flexDirection='column'
       gap={2}
-      padding={MainPadding}
+      padding={padding}
       {...props}
     >
       {(title || description || icon) && (

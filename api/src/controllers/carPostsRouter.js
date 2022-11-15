@@ -8,11 +8,17 @@ carPostsRouter.get('/', userExtractor, async (request, response) => {
   return CarPostService.create(carAd)
 })
 
-carPostsRouter.get('/:id', async (request, response, next) => {
-
+carPostsRouter.get('/:postId', async (request, response, next) => {
+  const { postId } = request.params
+  try {
+    const carPost = await CarPostService.getById({ postId })
+    response.json(carPost)
+  } catch (err) {
+    next(err)
+  }
 })
 
-carPostsRouter.delete('/:id', userExtractor, async (request, response, next) => {
+carPostsRouter.delete('/:postId', userExtractor, async (request, response, next) => {
 
 })
 

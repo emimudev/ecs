@@ -117,13 +117,16 @@ function Dropzone({ name, children, onDropAccepted, isError = false, ...props })
   )
 }
 
-function ImagePreview({ file }) {
-  const [src, setSrc] = useState(null)
+export function ImagePreview({ file, alt, ...props }) {
+  const [src, setSrc] = useState(typeof file === 'string' ? file : null)
   const reader = new FileReader()
-  reader.readAsDataURL(file)
-  reader.addEventListener('load', () => {
-    setSrc(reader.result)
-  }, false)
+
+  if (typeof file !== 'string') {
+    reader.readAsDataURL(file)
+    reader.addEventListener('load', () => {
+      setSrc(reader.result)
+    }, false)
+  }
 
   return (
     <Flex
@@ -138,16 +141,19 @@ function ImagePreview({ file }) {
       }}
       borderRadius='lg'
       overflow='hidden'
+      {...props}
     >
       <LazyLoadImage
+        loading='eager'
         placeholder={<Skeleton w='full' h='full' />}
         src={src}
         style={{
           objectFit: 'cover',
           objectPosition: 'center',
+          width: '100%',
           height: '100%'
         }}
-        alt={file.name}
+        alt={alt ?? file.name}
       />
     </Flex>
   )

@@ -1,5 +1,5 @@
 import { Form, Formik, useFormikContext } from 'formik'
-import { Alert, AlertIcon, Box, Button, Flex, Icon, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, useDisclosure } from '@chakra-ui/react'
+import { Alert, AlertIcon, Box, Button, Flex, Icon } from '@chakra-ui/react'
 import { FiUser, FiSettings } from 'react-icons/fi'
 import { AiFillMoneyCollect, AiOutlineCar } from 'react-icons/ai'
 import { BsImages } from 'react-icons/bs'
@@ -12,7 +12,6 @@ import Steps, { StepItem, StepItemSurface } from 'components/Steps'
 import Surface from 'components/Surface'
 import Dropzone from 'components/Dropzone'
 import publishCarSchema, { InitialValues } from './publishCarSchema'
-import { useEffect } from 'react'
 import { usePublishContext } from 'context/PublishCarContext'
 
 function PublishCarForm() {

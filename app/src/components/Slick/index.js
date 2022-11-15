@@ -49,6 +49,7 @@ const Slick = forwardRef(({
   solidArrows = false,
   showOverflow = true,
   hideArrows = true,
+  className,
   ...props
 }, ref) => {
   const sliderRef = useRef({})
@@ -85,7 +86,7 @@ const Slick = forwardRef(({
     <chakra.div {...containerProps}>
       <Slider
         ref={sliderRef}
-        className={showOverflow && 'slider-allow-overflow'}
+        className={showOverflow && `slider-allow-overflow ${className}`}
         nextArrow={NextArrow}
         prevArrow={PrevArrow}
         {..._settings}

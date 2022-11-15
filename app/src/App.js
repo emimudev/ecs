@@ -12,6 +12,7 @@ import PageLayout from 'components/PageLayout'
 import HomePage from 'pages/HomePage'
 import PublishCarPage from 'pages/PublishCarPage'
 import NotFoundPage from 'pages/NotFoundPage'
+import PostPage from 'pages/PostPage'
 
 const queryClient = new QueryClient()
 
@@ -28,6 +29,7 @@ function App() {
                   <Route path='publish/fourth-wheels' element={<PublishCarPage />} />
                   <Route path='publish/two-wheels' element={<h1>Publish two-wheels</h1>} />
                   <Route path='publish/acc-and-spare' element={<h1>Publish acc-and-spare</h1>} />
+                  <Route path='post/:postId' element={<PostPage />} />
                   <Route path='*' element={<NotFoundPage />} />
                 </Route>
               </Routes>

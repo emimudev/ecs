@@ -57,3 +57,7 @@ export const getFormData = obj => Object.keys(obj).reduce((fd, key) => {
   fd.append(key, obj[key])
   return fd
 }, new FormData())
+
+export const getCloudinaryImage = ({ publicId, w = '600' }) => (
+  `https://res.cloudinary.com/dvpbdhkn0/image/upload/c_thumb,w_${w},g_face/v1667192451/${publicId}.webp`
+)
