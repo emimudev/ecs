@@ -11,13 +11,15 @@ const Product = {
 
 function FeaturedPosts() {
   return (
-    <Slick>
-      {new Array(15).fill(Product).map((element, i) => (
-        <SlickItem key={i}>
-          <ProductCard title={i} {...element} />
-        </SlickItem>
-      ))}
-    </Slick>
+    <>
+      <Slick>
+        {new Array(15).fill(Product).map((element, i) => (
+          <SlickItem key={i}>
+            <ProductCard title={i} {...element} />
+          </SlickItem>
+        ))}
+      </Slick>
+    </>
   )
 }
 

@@ -1,7 +1,7 @@
 import { RiApps2Fill } from 'react-icons/ri'
 import { Icon } from '@chakra-ui/react'
 import { GiElectric } from 'react-icons/gi'
-import { MdLocalOffer, MdCompare } from 'react-icons/md'
+import { MdLocalOffer, MdPermDeviceInformation } from 'react-icons/md'
 import { ElectricBicycle, ElectricCar, ElectricMotorcycle } from 'components/Icons'
 
 export const NAV_ITEMS = [
@@ -12,7 +12,7 @@ export const NAV_ITEMS = [
       {
         label: 'Vehículos',
         subLabel: 'Encuentra el auto que estás buscando de tu marca favorita.',
-        href: 'cars',
+        href: '/cars',
         icon: <Icon as={ElectricCar} h={8} w={8} />
       },
       {
@@ -41,8 +41,8 @@ export const NAV_ITEMS = [
     icon: MdLocalOffer
   },
   {
-    label: 'Comparador',
-    href: '/compare',
-    icon: MdCompare
+    label: 'Información',
+    href: '/information',
+    icon: MdPermDeviceInformation
   }
 ]
