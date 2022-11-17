@@ -13,15 +13,18 @@ import {
   Text,
   useColorModeValue
 } from '@chakra-ui/react'
-import CarsFilters from './CarsFilters'
+
 import { BiSearchAlt } from 'react-icons/bi'
-import { defaultPage, filter, setCarData, setTotalPages, unFilter } from 'redux/slices/CarPosts'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { resetFilters } from 'redux/slices/Filters'
-import carPostsAPI from 'services/carPostsAPI'
-import { AiFillFilter, AiOutlineFilter } from 'react-icons/ai'
 
-const FilterDrawer = ({ type = 'cars', loading, setLoading }) => {
+import { AiFillFilter, AiOutlineFilter } from 'react-icons/ai'
+import motorcyclePostsAPI from 'services/motorcyclePostAPI'
+import { defaultPage, filter, setMotorcyclesData, setTotalPages, unFilter } from 'redux/slices/MotorcyclePosts'
+import CarsFilters from '../CarsFilters'
+
+const FilterDrawerMotorcycle = ({ type = 'cars', loading, setLoading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const btnRef = React.useRef()
   const dispatch = useDispatch()
@@ -35,48 +38,29 @@ const FilterDrawer = ({ type = 'cars', loading, setLoading }) => {
     province,
     carsStyles
   } = useSelector(state => state.filters)
-
   const {
-    pageNumber,
-    isFiltered
-  } = useSelector(state => state.carPosts)
-
+    isFiltered,
+    pageNumber
+  } = useSelector(state => state.motorcyclePosts)
   function filterData() {
-    carPostsAPI.getPostBySearch(
-      pageNumber,
-      model,
-      yearValues.join(','),
-      priceValues.join(','),
-      brandValues.join(','),
-      province,
-      carsStyles
-    )
-      .then(({ totalPages, posts }) => {
-        dispatch(setCarData(posts))
-        dispatch(setTotalPages(totalPages))
-      })
-  }
-
-  function resetData() {
     setLoading(true)
-    carPostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
-      dispatch(setCarData(posts))
+    motorcyclePostsAPI.getPostBySearch(pageNumber, model, yearValues.join(','), priceValues.join(','), brandValues.join(','), province, carsStyles).then(({ totalPages, posts }) => {
+      dispatch(setMotorcyclesData(posts))
       dispatch(setTotalPages(totalPages))
       setLoading(false)
     })
   }
-
+  function resetData() {
+    setLoading(true)
+    motorcyclePostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
+      dispatch(setMotorcyclesData(posts))
+      dispatch(setTotalPages(totalPages))
+      setLoading(false)
+    })
+  }
   return (
     <>
-      <Button
-        size={['sm', 'md']}
-        leftIcon={isFiltered ? <AiFillFilter /> : <AiOutlineFilter />}
-        ref={btnRef}
-        colorScheme={isFiltered ? 'pink' : 'gray'}
-        bg={isFiltered ? 'pink.400' : bg}
-        color={color}
-        onClick={onOpen}
-      >
+      <Button size={['sm', 'md']} leftIcon={isFiltered ? <AiFillFilter /> : <AiOutlineFilter />} ref={btnRef} colorScheme={isFiltered ? 'pink' : 'gray'} bg={isFiltered ? 'pink.400' : bg} color={color} onClick={onOpen}>
         Filtros
       </Button>
       <Drawer
@@ -139,4 +123,4 @@ const FilterDrawer = ({ type = 'cars', loading, setLoading }) => {
   )
 }
 
-export default FilterDrawer
+export default FilterDrawerMotorcycle

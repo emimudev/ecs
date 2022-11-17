@@ -141,7 +141,7 @@ export const ElectricCarBrandList = [{
   image: {
     source: 'https://www.carlogos.org/logo/Audi-logo-2009-640x334.jpg',
     thumb: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/thumb/audi.png',
-    optimized: 'https://assets.stickpng.com/thumbs/580b585b2edbce24c47b2c18.png',
+    optimized: 'https://myleanacademy.com/wp-content/uploads/2020/01/audi-logo-png-1920x1080-hd-1080p-1920.png',
     original: 'https://raw.githubusercontent.com/filippofilip95/car-logos-dataset/master/logos/original/audi.jpg',
     localThumb: './thumb/audi.png',
     localOptimized: './optimized/audi.png',
@@ -256,7 +256,7 @@ export const ElectricCarBrandList = [{
     localOriginal: './original/mg.jpg'
   }
 }, {
-  name: 'Volkswagen',
+  name: 'Volks',
   slug: 'volkswagen',
   image: {
     source: 'https://www.carlogos.org/logo/Volkswagen-logo-2019-640x500.jpg',
@@ -281,7 +281,7 @@ export const MotorCycleBrandList = [
   },
   {
     id: 2,
-    name: 'ZERO',
+    name: 'Zero',
     slug: 'zero',
     image: {
       optimized: 'https://1000marcas.net/wp-content/uploads/2021/02/Zero-Motorcycles-logo.png'
@@ -321,7 +321,7 @@ export const MotorCycleBrandList = [
   },
   {
     id: 7,
-    name: 'Husqvarna',
+    name: 'Husq',
     slug: 'husqvarna',
     image: {
       optimized: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Husqvarna_logo_ArtWW.svg/1200px-Husqvarna_logo_ArtWW.svg.png'
@@ -329,7 +329,7 @@ export const MotorCycleBrandList = [
   },
   {
     id: 8,
-    name: 'HORWIN',
+    name: 'Horw',
     slug: 'horwin',
     image: {
       optimized: 'https://crmotos.com/wp-content/uploads/elementor/thumbs/logo-horwin-min-pqp4bwhavjrfjxyo96pe0c0dy8snpuoghsc3yc1pj0.png'

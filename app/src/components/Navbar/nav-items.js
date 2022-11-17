@@ -31,7 +31,7 @@ export const NAV_ITEMS = [
         label: 'Accesorios y repuestos',
         subLabel: 'Todos los accesorios y repuestos que necesitas para tu vehículo, motocicleta o bicicleta.',
         icon: <Icon as={GiElectric} h={8} w={8} />,
-        href: 'bicycles'
+        href: 'acc-gears'
       }
     ]
   },

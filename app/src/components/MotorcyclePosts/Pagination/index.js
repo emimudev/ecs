@@ -15,11 +15,6 @@ function Pagination() {
   }
   const color = useColorModeValue('gray.800', 'whiteAlpha.900')
   const pages = new Array(totalPages).fill(null).map((v, i) => i)
-
-  if (totalPages === 1) {
-    return null
-  }
-
   return (
     <Container mt='25px' mb='25px' maxW='2xl' centerContent>
       <HStack>

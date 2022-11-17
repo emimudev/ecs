@@ -1,6 +1,5 @@
-import { Box, CircularProgress, Grid, SimpleGrid, Stack } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
-
+import { CircularProgress, Grid, Stack } from '@chakra-ui/react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCarData, setTotalPages } from 'redux/slices/CarPosts'
 import carPostsAPI from 'services/carPostsAPI'
@@ -8,7 +7,7 @@ import CarsCards from './CarsCards'
 import EmptySearch from './EmptySearch'
 import Pagination from './Pagination'
 
-function CarsPosts() {
+function CarsPosts({ loading, setLoading }) {
   const {
     model,
     yearValues,
@@ -23,7 +22,6 @@ function CarsPosts() {
     carsData
   } = useSelector(state => state.carPosts)
   const dispatch = useDispatch()
-  const [loading, setLoading] = useState(false)
   useEffect(() => {
     setLoading(true)
     if (isFiltered) {

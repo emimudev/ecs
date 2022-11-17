@@ -36,28 +36,22 @@ export const filterSlice = createSlice({
     },
     setMotorcycle: (state) => {
       state.type = 'motorcycle'
-      state.model = ''
       state.yearValues = [1996, 2022]
       state.minYear = 1996
       state.maxYear = 2022
       state.priceValues = [100000, 50000000]
       state.minPrice = 100000
       state.maxPrice = 50000000
-      state.brandValues = []
-      state.province = ''
       state.carsStyles = ''
     },
     setCars: (state) => {
       state.type = 'cars'
-      state.model = ''
       state.yearValues = [1996, 2022]
       state.minYear = 1996
       state.maxYear = 2022
       state.priceValues = [1000000, 150000000]
       state.minPrice = 1000000
       state.maxPrice = 150000000
-      state.brandValues = []
-      state.province = ''
       state.carsStyles = ''
     },
     resetFilters: (state) => {

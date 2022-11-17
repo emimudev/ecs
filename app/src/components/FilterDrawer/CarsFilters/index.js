@@ -1,9 +1,8 @@
 import { Accordion, AccordionItem, Checkbox, CheckboxGroup, Grid, GridItem, Image, Input, RangeSlider, RangeSliderFilledTrack, RangeSliderThumb, RangeSliderTrack, Tooltip, Select, Box, useColorModeValue, RangeSliderMark, Tag, VStack, SimpleGrid, TagLabel } from '@chakra-ui/react'
-import BrandLogo from 'components/Illustrations/BrandLogo'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setBrandValues, setCars, setCarsStyles, setModel, setMotorcycle, setPriceValues, setProvince, setYearValues } from 'redux/slices/Filters'
-import { CarsStyles, SelectProvinces } from 'utils'
+import { CarsStyles, MotorcycleStyles, SelectProvinces } from 'utils'
 import { ElectricCarBrandList, MotorCycleBrandList } from 'utils/Brands'
 
 import FilterField from '../FilterField'
@@ -35,6 +34,7 @@ const CarsFilters = ({ filterType = 'cars' }) => {
     return (
       <GridItem>
         <Checkbox
+          w='50%'
           key={brand.name} value={brand.slug} spacing='1.5rem'
           onChange={(e) => {
             if (brandValues.includes(e.target.value)) {
@@ -45,11 +45,11 @@ const CarsFilters = ({ filterType = 'cars' }) => {
           }}
         >
           <VStack align='center'>
-            <Image boxSize='50px' src={brand.image.optimized} />
-            <Tag alignItems='center' size={['sm', 'md']} key={brand.name} variant='solid' bg='#f687b3' color={color}>
-              <TagLabel>{brand.name}</TagLabel>
-            </Tag>
+            <Image src={brand.image.optimized} width='90%' marginBottom={2} />
           </VStack>
+          <Tag alignItems='center' size={['sm', 'md']} variant='solid' bg='#f687b3' color={color}>
+            <TagLabel>{brand.name}</TagLabel>
+          </Tag>
         </Checkbox>
       </GridItem>
     )
@@ -102,7 +102,7 @@ const CarsFilters = ({ filterType = 'cars' }) => {
           label=''
           isInline
         >
-          <CheckboxGroup colorScheme='pink' value={brandValues}>
+          <CheckboxGroup colorScheme='pink' defaultValue={brandValues}>
             {filterType === 'cars' && <RenderCarBrands />}
             {filterType === 'motorcycle' && <RenderMotorcycleBrands />}
           </CheckboxGroup>
@@ -241,31 +241,46 @@ const CarsFilters = ({ filterType = 'cars' }) => {
           </Select>
         </FilterField>
       </AccordionItem>
-      {
-      (filterType === 'cars') &&
-        <AccordionItem>
-          <FilterField
-            acTitle='Estilo'
-            label='Estilo'
-          >
-            <Select
-              bg={bg}
-              placeholder='Seleccionar opcion'
-              onBlur={(e) => {
+      <AccordionItem>
+        <FilterField
+          acTitle='Estilo'
+          label='Estilo'
+        >
+          <Select
+            bg={bg}
+            placeholder='Seleccionar opcion'
+            onBlur={(e) => {
               // console.log(`Estilo: ${carsStyles}`)
-                const valor = e.target.value
-              }}
-              onChange={(e) => {
-                dispatch(setCarsStyles(e.target.value))
-              }}
-            >
-              {CarsStyles.map(
-                (cars) => <option key={cars.value} value={cars.value} bg={bg}>{cars.label}</option>
-              )}
-            </Select>
-          </FilterField>
-        </AccordionItem>
-      }
+              const valor = e.target.value
+            }}
+            onChange={(e) => {
+              dispatch(setCarsStyles(e.target.value))
+            }}
+          >
+            {
+              filterType === 'cars' &&
+                <>
+                  {
+                  CarsStyles.map(
+                    (cars) => <option key={cars.value} value={cars.value} bg={bg}>{cars.label}</option>
+                  )
+                  }
+                </>
+              }
+            {
+              filterType === 'motorcycle' &&
+                <>
+                  {
+                    MotorcycleStyles.map(
+                      (motorcycle) => <option key={motorcycle.value} value={motorcycle.value} bg={bg}>{motorcycle.label}</option>
+                    )
+                  }
+                </>
+              }
+
+          </Select>
+        </FilterField>
+      </AccordionItem>
     </Accordion>
   )
 }
