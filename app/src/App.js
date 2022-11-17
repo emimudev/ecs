@@ -18,6 +18,7 @@ import CarsPage from 'pages/CarsPage'
 import PublishMotorcyclePage from 'pages/PublishMotorcyclePage'
 import MotorcyclePage from 'pages/MotorcyclePage'
 import MotorcyclePostPage from 'pages/MotorcyclePostPage'
+import SettingsPage from 'pages/SettingsPage'
 
 const queryClient = new QueryClient()
 
@@ -39,6 +40,7 @@ function App() {
                   <Route path='publish/acc-and-spare' element={<h1>Publish acc-and-spare</h1>} />
                   <Route path='post/:postId' element={<PostPage />} />
                   <Route path='post/motorcycles/:postId' element={<MotorcyclePostPage />} />
+                  <Route path='settings/*' element={<SettingsPage />} />
                   <Route path='*' element={<NotFoundPage />} />
                 </Route>
               </Routes>

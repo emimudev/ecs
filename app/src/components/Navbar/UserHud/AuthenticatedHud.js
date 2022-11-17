@@ -27,6 +27,7 @@ import { useAuthState } from 'hooks/useAuthState'
 import { PublishAdButton } from 'components/PublishAd'
 import UserAvatar from 'components/UserAvatar'
 import MobileNavTrigger from '../MobileNavigation/MobileNavTrigger'
+import { Link } from 'react-router-dom'
 
 function AuthenticatedHud() {
   const { user } = useAuthState()
@@ -84,10 +85,10 @@ function AuthenticatedHud() {
           <MenuGroup color={titleMenuColor}>
             <MenuGroupTitle>Perfil</MenuGroupTitle>
             <MenuDivider my='0.3rem' />
-            <MenuItem borderRadius='lg'>
+            <MenuItem as={Link} to='settings/account' borderRadius='lg'>
               Mi cuenta
             </MenuItem>
-            <MenuItem borderRadius='lg'>
+            <MenuItem as={Link} to='settings/myposts' borderRadius='lg'>
               Mis publicaciones
             </MenuItem>
           </MenuGroup>
@@ -132,7 +133,7 @@ function AuthenticatedHud() {
   )
 }
 
-function MenuGroupTitle({ children, ...props }) {
+export function MenuGroupTitle({ children, ...props }) {
   return (
     <Flex
       _dark={{ color: 'whiteAlpha.600' }}
