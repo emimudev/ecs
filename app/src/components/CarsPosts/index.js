@@ -1,4 +1,4 @@
-import { CircularProgress, Grid, Stack } from '@chakra-ui/react'
+import { Flex, Grid, Skeleton } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setCarData, setTotalPages } from 'redux/slices/CarPosts'
@@ -49,17 +49,25 @@ function CarsPosts({ loading, setLoading }) {
   }, [pageNumber])
   return (
     <>
-      {loading
+      {loading /* eslint-disable */
         ? (
-          <Stack
-            textAlign='center'
-            align='center'
-            spacing={{ base: 8, md: 10 }}
-            py={{ base: 20, md: 28 }}
+          <Grid
+            gridTemplateColumns={{
+              base: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+              xl: 'repeat(5, 1fr)'
+            }}
+            gap='5'
           >
-            <CircularProgress isIndeterminate color='pink.500' />
-          </Stack>)
-        : (carsData.length === 0 /* eslint-disable */
+            {new Array(15).fill(0, 0).map((element, i) => (
+              <Flex key={i} w='full' h='140px' borderRadius='lg' overflow='hidden'>
+                <Skeleton w='full' h='full' />
+              </Flex>
+            ))}
+          </Grid>
+        )
+        : (carsData.length === 0
           ? <EmptySearch />
           : (
             <>
