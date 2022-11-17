@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   useDisclosure,
   Drawer,
@@ -13,7 +13,6 @@ import {
   Text,
   useColorModeValue
 } from '@chakra-ui/react'
-
 import CarsFilters from './CarsFilters'
 import { BiSearchAlt } from 'react-icons/bi'
 import { defaultPage, filter, setCarData, setTotalPages, unFilter } from 'redux/slices/CarPosts'
@@ -36,25 +35,46 @@ const FilterDrawer = ({ type = 'cars' }) => {
     province,
     carsStyles
   } = useSelector(state => state.filters)
+
   const {
     pageNumber,
     isFiltered
   } = useSelector(state => state.carPosts)
+
   function filterData() {
-    carPostsAPI.getPostBySearch(pageNumber, model, yearValues.join(','), priceValues.join(','), brandValues.join(','), province, carsStyles).then(({ totalPages, posts }) => {
-      dispatch(setCarData(posts))
-      dispatch(setTotalPages(totalPages))
-    })
+    carPostsAPI.getPostBySearch(
+      pageNumber,
+      model,
+      yearValues.join(','),
+      priceValues.join(','),
+      brandValues.join(','),
+      province,
+      carsStyles
+    )
+      .then(({ totalPages, posts }) => {
+        dispatch(setCarData(posts))
+        dispatch(setTotalPages(totalPages))
+      })
   }
+
   function resetData() {
     carPostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
       dispatch(setCarData(posts))
       dispatch(setTotalPages(totalPages))
     })
   }
+
   return (
     <>
-      <Button size={['sm', 'md']} leftIcon={isFiltered ? <AiFillFilter /> : <AiOutlineFilter />} ref={btnRef} colorScheme={isFiltered ? 'pink' : 'gray'} bg={isFiltered ? 'pink.400' : bg} color={color} onClick={onOpen}>
+      <Button
+        size={['sm', 'md']}
+        leftIcon={isFiltered ? <AiFillFilter /> : <AiOutlineFilter />}
+        ref={btnRef}
+        colorScheme={isFiltered ? 'pink' : 'gray'}
+        bg={isFiltered ? 'pink.400' : bg}
+        color={color}
+        onClick={onOpen}
+      >
         Filtros
       </Button>
       <Drawer

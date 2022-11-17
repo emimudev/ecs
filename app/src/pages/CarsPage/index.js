@@ -1,7 +1,7 @@
-import { Box, Flex, Spacer, Text } from '@chakra-ui/react'
+import { Box, Flex, Spacer } from '@chakra-ui/react'
 import CarsPosts from 'components/CarsPosts'
 import FilterDrawer from 'components/FilterDrawer'
-import { PageBody, PageContainer, PageSection } from 'components/PageLayout'
+import { PageBody, PageContainer, PageSection, PageTitle } from 'components/PageLayout'
 import ScrollToTopOnMount from 'components/ScrollToTopOnMount'
 
 function CarsPage() {
@@ -10,16 +10,12 @@ function CarsPage() {
       <ScrollToTopOnMount />
       <PageBody>
         <PageSection title='' mt='5' hasSlick>
+          <PageTitle extraContent={<FilterDrawer />}>
+            Vehículos a la venta
+          </PageTitle>
           <Flex>
-            <Box p='4'>
-              <Text as='h4' fontSize='xl' fontWeight='bold' role='heading'>
-                Vehículos
-              </Text>
-            </Box>
             <Spacer />
-            <Box p='4'>
-              <FilterDrawer />
-            </Box>
+            <Box p='4' />
           </Flex>
           <CarsPosts />
         </PageSection>

@@ -10,7 +10,7 @@ function InformatioPage() {
   return (
     <PageContainer>
       <ScrollToTopOnMount />
-      <PageBody>
+      <PageBody gap='120px' pb='20'>
         <PageSection hasSlick>
           <InformationTitle />
         </PageSection>

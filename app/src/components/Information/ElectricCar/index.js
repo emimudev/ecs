@@ -40,7 +40,7 @@ const Feature = ({ text, icon, iconBg }) => {
 export default function ElectricCar() {
   const color = useColorModeValue('gray.800', 'whiteAlpha.900')
   return (
-    <Container maxW='5xl' py={[8, 28]} id='electricCars'>
+    <Container maxW='container.xl' id='electricCars'>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={4}>
           <Heading

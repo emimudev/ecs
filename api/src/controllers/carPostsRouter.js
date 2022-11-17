@@ -27,8 +27,7 @@ carPostsRouter.get('/search', async (request, response) => {
   response.send({
     totalPages: Math.ceil(total / PageSize),
     posts
-  }
-  )
+  })
 })
 
 carPostsRouter.get('/:postId', async (request, response, next) => {

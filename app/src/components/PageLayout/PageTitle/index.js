@@ -1,14 +1,18 @@
-import { Heading } from '@chakra-ui/react'
+import { Flex, Heading, Spacer } from '@chakra-ui/react'
 import { memo } from 'react'
 
-function PageTitle({ children, ...props }) {
+function PageTitle({ children, extraContent, ...props }) {
   return (
-    <Heading
-      as='h1'
-      {...props}
-    >
-      {children}
-    </Heading>
+    <Flex flexWrap='wrap'>
+      <Heading
+        as='h1'
+        {...props}
+      >
+        {children}
+      </Heading>
+      <Spacer />
+      {extraContent}
+    </Flex>
   )
 }
 

@@ -56,6 +56,7 @@ function randomNumber(min, max) {
 
 function CarsCard({
   car,
+  id,
   discountPercentage = 0,
   currencyType = 'US',
   files,
@@ -66,10 +67,11 @@ function CarsCard({
       ? 'en-US'
       : 'es-CR'
   )
+  console.log({ car })
   return (
     <Link
       as={RouterLink}
-      to='#'
+      to={`/post/${id}`}
       display='block'
       _hover={{ ...hoverProps }}
       _focus={{ ...hoverProps }}

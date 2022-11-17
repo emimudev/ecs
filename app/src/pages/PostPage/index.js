@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Flex, Skeleton, Stack, chakra, Divider, Grid, GridItem, Tag } from '@chakra-ui/react'
-import { useQuery } from '@tanstack/react-query'
 import { formatDistance } from 'date-fns'
 import { useParams } from 'react-router-dom'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
@@ -16,18 +15,29 @@ import carPostsAPI from 'services/carPostsAPI'
 function PostPage() {
   const { postId } = useParams()
   const [imgIndex, setImgIndex] = useState(0)
-  const { error, data: post } = useQuery({
-    queryFn: async () => carPostsAPI.find(postId)
+  const [state, setState] = useState({
+    post: null,
+    isLoading: true,
+    isError: false
   })
+  const { error, post } = state
+
+  useEffect(() => {
+    carPostsAPI.find(postId)
+      .then((data) => {
+        setState({ post: data, isLoading: false, isError: false })
+      })
+  }, [postId])
 
   if (error) {
     return 'Ha ocurrido un error'
   }
 
   const handleChange = (goTo) => {
+    console.log(goTo)
     if (goTo !== imgIndex) { setImgIndex(goTo) }
   }
-  console.log({ post })
+  console.log({ files: post?.files })
 
   return (
     <PageContainer>
@@ -64,7 +74,7 @@ function PostPage() {
                 <Flex maxH='500px' minH='400px'>
                   {post && (
                     <LazyLoadImage
-                      src={getCloudinaryImage({ publicId: post?.files?.[imgIndex].public_id, w: '1400' })}
+                      src={getCloudinaryImage({ publicId: post?.files?.[imgIndex]?.public_id, w: '1400' })}
                       alt={`${post?.car?.brand} - ${post?.car?.model}`}
                       style={{ objectFit: 'contain' }}
                     />
@@ -89,7 +99,7 @@ function PostPage() {
                     >
                       {post.files.map((file, index) => (
                         <SlickItem
-                          key={index} onClick={() => handleChange(index)}
+                          key={file.public_id} onClick={() => handleChange(index)}
                         >
                           <ImagePreview
                             file={getCloudinaryImage({ publicId: file.public_id, w: '600' })}

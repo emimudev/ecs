@@ -1,4 +1,4 @@
-import { Box, CircularProgress, SimpleGrid, Stack } from '@chakra-ui/react'
+import { Box, CircularProgress, Grid, SimpleGrid, Stack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -27,11 +27,20 @@ function CarsPosts() {
   useEffect(() => {
     setLoading(true)
     if (isFiltered) {
-      carPostsAPI.getPostBySearch(pageNumber, model, yearValues.join(','), priceValues.join(','), brandValues.join(','), province, carsStyles).then(({ totalPages, posts }) => {
-        dispatch(setCarData(posts))
-        dispatch(setTotalPages(totalPages))
-        setLoading(false)
-      })
+      carPostsAPI.getPostBySearch(
+        pageNumber,
+        model,
+        yearValues.join(','),
+        priceValues.join(','),
+        brandValues.join(','),
+        province,
+        carsStyles
+      )
+        .then(({ totalPages, posts }) => {
+          dispatch(setCarData(posts))
+          dispatch(setTotalPages(totalPages))
+          setLoading(false)
+        })
     } else {
       carPostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
         dispatch(setCarData(posts))
@@ -40,7 +49,6 @@ function CarsPosts() {
       })
     }
   }, [pageNumber])
-
   return (
     <>
       {loading
@@ -53,19 +61,27 @@ function CarsPosts() {
           >
             <CircularProgress isIndeterminate color='pink.500' />
           </Stack>)
-        : (carsData.length === 0
-            ? <EmptySearch />
-            : (
-              <>
-                <SimpleGrid minChildWidth='250px' spacingX='45px' spacingY='40px'>
-                  {carsData.map((element, i) => (
-                    <Box key={i}><CarsCards title={i} {...element} /></Box>
-                  ))}
-                </SimpleGrid>
-                <Pagination />
-              </>
-              )
-          )}
+        : (carsData.length === 0 /* eslint-disable */
+          ? <EmptySearch />
+          : (
+            <>
+              <Grid
+                gridTemplateColumns={{
+                  base: 'repeat(2, 1fr)',
+                  md: 'repeat(3, 1fr)',
+                  lg: 'repeat(4, 1fr)',
+                  xl: 'repeat(5, 1fr)'
+                }}
+                gap='5'
+              >
+                {carsData.map((element, i) => (
+                  <CarsCards key={i} title={i} {...element} />
+                ))}
+              </Grid>
+              <Pagination />
+            </>
+          )
+        )/* eslint-enable */}
     </>
   )
 }
