@@ -17,6 +17,7 @@ app.use(express.static('../app/build'))
 app.use('/api/auth', routers.authRouter)
 app.use('/api/users', routers.usersRouter)
 app.use('/api/posts/cars', routers.carPostsRouter)
+app.use('/api/posts/motorcycle', routers.motorcyclePostsRouter)
 
 app.use('/*', express.static('../app/build'))
 app.use(middleware.handleErrors())

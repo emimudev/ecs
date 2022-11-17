@@ -2,13 +2,15 @@ import { Box, CircularProgress, SimpleGrid, Stack } from '@chakra-ui/react'
 import React, { useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { setCarData, setTotalPages } from 'redux/slices/CarPosts'
-import carPostsAPI from 'services/carPostsAPI'
-import CarsCards from './CarsCards'
+import { setMotorcyclesData, setTotalPages } from 'redux/slices/MotorcyclePosts'
+
+import motorcyclePostsAPI from 'services/motorcyclePostAPI'
+
 import EmptySearch from './EmptySearch'
+import MotorcycleCard from './MotorcycleCard'
 import Pagination from './Pagination'
 
-function CarsPosts({ loading, setLoading }) {
+function MotorcyclePosts({ loading, setLoading }) {
   const {
     model,
     yearValues,
@@ -20,20 +22,20 @@ function CarsPosts({ loading, setLoading }) {
   const {
     isFiltered,
     pageNumber,
-    carsData
-  } = useSelector(state => state.carPosts)
+    motorcyclesData
+  } = useSelector(state => state.motorcyclePosts)
   const dispatch = useDispatch()
   useEffect(() => {
     setLoading(true)
     if (isFiltered) {
-      carPostsAPI.getPostBySearch(pageNumber, model, yearValues.join(','), priceValues.join(','), brandValues.join(','), province, carsStyles).then(({ totalPages, posts }) => {
-        dispatch(setCarData(posts))
+      motorcyclePostsAPI.getPostBySearch(pageNumber, model, yearValues.join(','), priceValues.join(','), brandValues.join(','), province, carsStyles).then(({ totalPages, posts }) => {
+        dispatch(setMotorcyclesData(posts))
         dispatch(setTotalPages(totalPages))
         setLoading(false)
       })
     } else {
-      carPostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
-        dispatch(setCarData(posts))
+      motorcyclePostsAPI.getPage(pageNumber).then(({ totalPages, posts }) => {
+        dispatch(setMotorcyclesData(posts))
         dispatch(setTotalPages(totalPages))
         setLoading(false)
       })
@@ -52,13 +54,13 @@ function CarsPosts({ loading, setLoading }) {
           >
             <CircularProgress isIndeterminate color='pink.500' />
           </Stack>)
-        : (carsData.length === 0
+        : (motorcyclesData.length === 0
             ? <EmptySearch />
             : (
               <>
                 <SimpleGrid minChildWidth='250px' spacingX='45px' spacingY='40px'>
-                  {carsData.map((element, i) => (
-                    <Box key={i}><CarsCards title={i} {...element} currencyType='cr' /></Box>
+                  {motorcyclesData.map((element, i) => (
+                    <Box key={i}><MotorcycleCard title={i} {...element} currencyType='cr' /></Box>
                   ))}
                 </SimpleGrid>
                 <Pagination />
@@ -69,4 +71,4 @@ function CarsPosts({ loading, setLoading }) {
   )
 }
 
-export default CarsPosts
+export default MotorcyclePosts

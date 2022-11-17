@@ -29,6 +29,15 @@ export const CarsStyles = [
   { label: 'Microbus', value: 'Microbus' }
 ]
 
+export const MotorcycleStyles = [
+  { label: 'Doble Propósito', value: 'Doble Propósito' },
+  { label: 'Enduro', value: 'Enduro' },
+  { label: 'Sport', value: 'Sport' },
+  { label: 'Supermoto', value: 'Supermoto' },
+  { label: 'Trabajo', value: 'Trabajo' },
+  { label: 'Scooters', value: 'Scooters' },
+  { label: 'Kids', value: 'Kids' }
+]
 export function formatBytes(bytes, decimals = 2) {
   if (!+bytes) return '0 Bytes'
   const k = 1024
