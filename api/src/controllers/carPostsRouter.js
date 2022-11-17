@@ -30,6 +30,16 @@ carPostsRouter.get('/search', async (request, response) => {
   })
 })
 
+carPostsRouter.get('/myPosts', userExtractor, async (request, response, next) => {
+  const { _userId } = request.body
+  try {
+    const carPost = await CarPostService.getByUser({ userId: _userId })
+    response.json(carPost)
+  } catch (err) {
+    next(err)
+  }
+})
+
 carPostsRouter.get('/:postId', async (request, response, next) => {
   const { postId } = request.params
   try {

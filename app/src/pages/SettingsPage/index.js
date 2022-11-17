@@ -1,14 +1,16 @@
-import { Box, Divider, Flex, Heading, Menu, MenuItem, MenuList, chakra, Stack, Button } from '@chakra-ui/react'
+import { Box, Divider, Flex, Heading, Menu, MenuItem, MenuList, chakra, Stack, Button, Grid, Skeleton } from '@chakra-ui/react'
+import CarsCard from 'components/CarsPosts/CarsCards'
 import { MenuGroupTitle } from 'components/Navbar/UserHud/AuthenticatedHud'
 import { PageBody, PageContainer, PageTitle } from 'components/PageLayout'
 import ScrollToTopOnMount from 'components/ScrollToTopOnMount'
 import UserAvatar from 'components/UserAvatar'
 import { useAuthState } from 'hooks/useAuthState'
 import useHiddenPage from 'hooks/useHiddenPage'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { Route, Routes, useLocation, NavLink } from 'react-router-dom'
 import { logoutAction } from 'redux/slices/auth.slice'
+import carPostsAPI from 'services/carPostsAPI'
 
 function SettingsPage() {
   const { show } = useHiddenPage()
@@ -45,7 +47,7 @@ function SettingsSideBar() {
   const dispatcher = useDispatch()
   return (
     <Menu isOpen>
-      <MenuList shadow='none' bg='transparent' border='none' p='2'>
+      <MenuList shadow='none' bg='transparent' border='none' p='2' gap='1' display='flex' flexDir='column'>
         <MenuGroupTitle my='3'>General</MenuGroupTitle>
         <MenuItem
           as={NavLink}
@@ -65,6 +67,7 @@ function SettingsSideBar() {
         >
           Mis publicaciones
         </MenuItem>
+        <MenuItem borderRadius='lg'>Publicaciones favoritas</MenuItem>
         <MenuItem borderRadius='lg'>Privacidad y seguridad</MenuItem>
         <MenuGroupTitle my='3'>Configuración</MenuGroupTitle>
         <MenuItem borderRadius='lg'>Apariencia</MenuItem>
@@ -74,7 +77,9 @@ function SettingsSideBar() {
         <MenuItem borderRadius='lg'>Mis compras</MenuItem>
         <MenuItem borderRadius='lg'>Subscripción</MenuItem>
         <Divider my='3' />
-        <MenuItem borderRadius='lg' onClick={() => dispatcher(logoutAction())}>Cerrar sesión</MenuItem>
+        <MenuItem borderRadius='lg' onClick={() => dispatcher(logoutAction())}>
+          Cerrar sesión
+        </MenuItem>
       </MenuList>
     </Menu>
   )
@@ -156,12 +161,67 @@ function InfoDescription({ label, value }) {
 }
 
 function MyPosts() {
-  const [posts, setPosts] = useState()
+  const [posts, setPosts] = useState({
+    isLoading: true,
+    data: [],
+    isError: false
+  })
+
+  useEffect(() => {
+    carPostsAPI.getMyPosts()
+      .then((data) => {
+        setPosts({
+          isLoading: false,
+          isError: false,
+          data
+        })
+      })
+      .catch((err) => {
+        console.log({ err })
+      })
+  }, [])
+
+  console.log({ posts })
 
   return (
     <PageContainer>
       <PageBody py='5' gap='4'>
         <PageTitle>Mis publicaciones</PageTitle>
+        {posts.isLoading && (
+          <Grid
+            gridTemplateColumns={{
+              base: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(4, 1fr)',
+              xl: 'repeat(5, 1fr)'
+            }}
+            gap='5'
+          >
+            {new Array(8).fill(0, 0).map((_, i) => (
+              <Flex key={i} w='full' h='140px' borderRadius='lg' overflow='hidden'>
+                <Skeleton w='full' h='full' />
+              </Flex>
+            ))}
+          </Grid>
+        )}
+        {(!posts.isLoading && posts.data.length === 0) && (
+          'No hay publicaciones'
+        )}
+        {!posts.isLoading && (
+          <Grid
+            gridTemplateColumns={{
+              base: 'repeat(1, 1fr)',
+              md: 'repeat(2, 1fr)',
+              lg: 'repeat(3, 1fr)',
+              xl: 'repeat(4, 1fr)'
+            }}
+            gap='5'
+          >
+            {posts.data?.map((element, i) => (
+              <CarsCard key={i} {...element} />
+            ))}
+          </Grid>
+        )}
       </PageBody>
     </PageContainer>
   )

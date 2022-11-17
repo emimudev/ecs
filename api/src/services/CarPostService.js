@@ -18,6 +18,11 @@ async function getById({ postId }) {
   return await CarPostModel.findById(postId)
 }
 
+async function getByUser({ userId }) {
+  console.log({ userId })
+  return await CarPostModel.find({ publishedBy: { _id: userId } })
+}
+
 async function getAll() {
   return await CarPostModel.find({})
 }
@@ -116,7 +121,8 @@ const CarPostService = {
   getSearchTotal,
   getById,
   remove,
-  addFiles
+  addFiles,
+  getByUser
 }
 
 module.exports = { CarPostService }

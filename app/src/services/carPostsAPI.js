@@ -27,11 +27,18 @@ function getPostBySearch(page, model, yearValues, priceValues, brandValues, prov
     .then(res => res.data)
 }
 
+function getMyPosts() {
+  return axios
+    .get(`${API_URL}/${ENTRY_POINT}/myPosts`)
+    .then(res => res.data)
+}
+
 const carPostsAPI = {
   create,
   getPage,
   find,
-  getPostBySearch
+  getPostBySearch,
+  getMyPosts
 }
 
 export default carPostsAPI
