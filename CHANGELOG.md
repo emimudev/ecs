@@ -1,5 +1,18 @@
-## 1.0.0 (2022-11-30)
+## 2.0.0 (2022-11-30)
 
+* 2.0.0 ([09bf75e](https://github.com/emimudev/ecs/commit/09bf75e))
+
+
+
+## 1.1.0 (2022-11-30)
+
+* 1.1.0 ([dc81fe2](https://github.com/emimudev/ecs/commit/dc81fe2))
+
+
+
+## <small>1.0.1 (2022-11-30)</small>
+
+* 1.0.1 ([93b7d3c](https://github.com/emimudev/ecs/commit/93b7d3c))
 * Add my posts page ([d79bdf1](https://github.com/emimudev/ecs/commit/d79bdf1))
 * Adding information page, Cars page and filters ([4137ca8](https://github.com/emimudev/ecs/commit/4137ca8))
 * Adding Motorcycle page filters and form ([74970d6](https://github.com/emimudev/ecs/commit/74970d6))
@@ -14,6 +27,7 @@
 * Update README.md ([9a605f1](https://github.com/emimudev/ecs/commit/9a605f1))
 * Update README.md ([f6d6601](https://github.com/emimudev/ecs/commit/f6d6601))
 * Update README.md ([6c3fba2](https://github.com/emimudev/ecs/commit/6c3fba2))
+* chore: :memo: add changelog ([c8a25ba](https://github.com/emimudev/ecs/commit/c8a25ba))
 * Added: Ad posts are stored ([d68fcd3](https://github.com/emimudev/ecs/commit/d68fcd3))
 * Added: AdPricing ([b3ba03a](https://github.com/emimudev/ecs/commit/b3ba03a))
 * Added: FieldForm ([45dafaf](https://github.com/emimudev/ecs/commit/45dafaf))
